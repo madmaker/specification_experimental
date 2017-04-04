@@ -7,17 +7,17 @@ public class MaterialSpecLine extends SpecLine
     this.attributes = new MaterialSpecLineAttributes();
   }
 
-  public abstract void init()
+  public void init()
   {
 
   }
 
-  public abstract void build()
+  public void build()
   {
 
   }
 
-  public abstract String getUid()
+  public String getUid()
   {
     
   }

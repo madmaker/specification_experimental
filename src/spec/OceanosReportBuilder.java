@@ -12,7 +12,7 @@ public class OceanosReportBuilder
 		checkData();
 		try
 		{
-			FileUtil.copy(OceanosReportBuilderMethod.class.getResourceAsStream("/icons/iconOceanos.jpg"),
+			FileUtil.copy(OceanosReportBuilder.class.getResourceAsStream("/icons/iconOceanos.jpg"),
 					new File(specification.getXmlFile().getParentFile().getAbsolutePath() + "\\iconOceanos.jpg"));
 		}
 		catch (IOException e)
@@ -41,7 +41,7 @@ public class OceanosReportBuilder
 		checkData();
 		try
 		{
-			copy(OceanosReportBuilderMethod.class.getResourceAsStream("/icons/iconOceanos.jpg"),
+			copy(OceanosReportBuilder.class.getResourceAsStream("/icons/iconOceanos.jpg"),
 					new File(specification.getXmlFile().getParentFile().getAbsolutePath() + "\\iconOceanos.jpg"));
 		}
 		catch (IOException e)

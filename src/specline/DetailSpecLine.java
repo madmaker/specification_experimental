@@ -1,5 +1,7 @@
 package specline;
 
+import com.teamcenter.rac.kernel.TCComponentBOMLine;
+
 public abstract class DetailSpecLine extends SpecLine
 {
 	public DetailSpecLine()
@@ -7,17 +9,17 @@ public abstract class DetailSpecLine extends SpecLine
 		this.attributes = new DetailSpecLineAttributes();
 	}
 
-	public abstract void init()
+	public void init()
 	{
 
 	}
 
-	public abstract void build()
+	public void build()
 	{
 
 	}
 
-	public abstract String getUid()
+	public String getUid()
 	{
     
 	}

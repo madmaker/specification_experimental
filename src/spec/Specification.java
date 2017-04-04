@@ -1,6 +1,7 @@
 package spec;
 
 import java.io.File;
+import java.io.InputStream;
 
 public class Specification
 {
@@ -22,7 +23,10 @@ public class Specification
 
 	public void buildReportFile()
 	{
-		ReportConfiguration configuration = new ReportConfiguration();
+		InputStream template = Specification.class.getResourceAsStream("/pdf/OceanosSpecPDFTemplate.xsl");
+		InputStream config = Specification.class.getResourceAsStream("/pdf/OceanosUserconfig.xsl");
+		ReportConfiguration configuration = new ReportConfiguration(template, config);
+		
 		Report report = new Report(configuration);
 	}
 }
