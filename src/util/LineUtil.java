@@ -7,11 +7,13 @@ import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import sp.SPSettings;
+
 public class LineUtil
 {
 	static final Font		font				= new Font("Arial", Font.PLAIN, 14);
 	static final String[]	emptyValues			= {};
-	static String[]			nonbreakableWords	= Specification.settings.getNonbreakableWords();	// "ГОСТ>", "ОСТ>", "ISO>"
+	static String[]			nonbreakableWords	= SPSettings.nonbreakableWords;	// "ГОСТ>", "ОСТ>", "ISO>"
 	static String[]			nonbreakablePlaneArray;
 
 	static
