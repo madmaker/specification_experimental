@@ -15,7 +15,7 @@ public abstract class SPBlock
 	};
 
 	public static enum BlockType {
-		DEFAULT
+		DEFAULT, ME
 	};
 
 	public SPBlock(String title, SPBlockAttributes attributes)

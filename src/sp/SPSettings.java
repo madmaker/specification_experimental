@@ -3,6 +3,7 @@ package sp;
 public class SPSettings
 {
 	public static boolean isOKPressed;
+	public static boolean isCancelled;
 	public static boolean canRenumerize;
 	public static boolean canUseReservePositions;
 	public static boolean canReadPrevRevPositions;
@@ -23,6 +24,7 @@ public class SPSettings
 	public static void reset()
 	{
 		isOKPressed = false;
+		isCancelled = false;
 		canRenumerize = false;
 		canUseReservePositions = false;
 		canReadPrevRevPositions = false;

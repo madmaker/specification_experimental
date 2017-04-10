@@ -1,11 +1,11 @@
 package sp;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.concurrent.CancellationException;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import org.eclipse.jface.operation.IRunnableWithProgress;
-import org.eclipse.ui.handlers.HandlerUtil;
 
 import com.teamcenter.rac.kernel.TCComponent;
 import com.teamcenter.rac.kernel.TCComponentBOMLine;
@@ -36,21 +36,23 @@ public class DataReader
 	public void readData()
 	{
 		try {
-			pd.run(true /*fork*/, true /*cancelable*/, new IRunnableWithProgress() {
+			pd.run(true, true, new IRunnableWithProgress() {
 				public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
 					monitor.beginTask("Чтение данных", 100);
-					
+					readGeneralNoteForm();
+					readBOMData(monitor);
 					monitor.done();
 				}
 			});
 		} catch (InvocationTargetException | InterruptedException e) {
 			e.printStackTrace();
+		} catch (CancellationException ex) {
+			SPSettings.isCancelled = true;
+			System.out.println(ex.getMessage());
 		}
-		readGeneralNoteForm();
-		readBOMData();
 	}
 	
-	private void readBOMData()
+	private void readBOMData(IProgressMonitor monitor)
 	{
 		try{
 			ExpandPSOneLevelInfo levelInfo = new ExpandPSOneLevelInfo();
@@ -63,15 +65,22 @@ public class DataReader
 			ExpandPSOneLevelResponse levelResp = smsService.expandPSOneLevel(levelInfo, levelPref);
 	
 			if (levelResp.output.length > 0) {
+				monitor.beginTask("Чтение данных структуры сборки", levelResp.output.length);
 				for (ExpandPSOneLevelOutput levelOut : levelResp.output) {
 					System.out.println(levelResp.output.length + " : child lines");
+					monitor.worked(1);
 					for (ExpandPSData psData : levelOut.children) {
 						System.out.println(psData.bomLine.getProperty("bl_line_name"));
 						//expandBOMLines(psData.bomLine);
 					}
+					if(monitor.isCanceled())
+					{
+						throw new CancellationException("Чтение данных структуры сборки было отменено");
+					}
 				}
+				monitor.done();
 			}
-		} catch (Exception ex) {
+		} catch (TCException ex) {
 			ex.printStackTrace();
 		}
 	}
@@ -103,7 +112,7 @@ public class DataReader
 					SPSettings.blockSettings = spIR.getRelatedComponent("IMAN_master_form_rev").getProperty("object_desc");
 				}
 			}
-		} catch (Exception ex){
+		} catch (TCException ex){
 			ex.printStackTrace();
 		}
 	}

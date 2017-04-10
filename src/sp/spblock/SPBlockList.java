@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.ListIterator;
 
 import sp.spblock.SPBlock.BlockContentType;
+import sp.spblock.SPBlock.BlockType;
 
 public class SPBlockList
 {
@@ -24,6 +25,16 @@ public class SPBlockList
 		for (SPBlock block : list)
 		{
 			if (block.attributes.contentType == contentType)
+				return block;
+		}
+		return null;
+	}
+	
+	public SPBlock getBlock(BlockContentType contentType, BlockType type)
+	{
+		for (SPBlock block : list)
+		{
+			if (block.attributes.contentType == contentType && block.attributes.type == type)
 				return block;
 		}
 		return null;

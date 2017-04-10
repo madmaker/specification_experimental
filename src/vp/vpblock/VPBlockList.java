@@ -3,6 +3,8 @@ package vp.vpblock;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
+import vp.vpblock.VPBlock.BlockContentType;
+
 public class VPBlockList
 {
 	private LinkedList<VPBlock> list;
