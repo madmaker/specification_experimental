@@ -94,14 +94,6 @@ public class VPDialog extends Dialog
 				
 				VPSettings.isOKPressed = false;
 				shell.close();
-				
-				VPRunnable runnable = new VPRunnable(display);
-				Thread mainBuild = new Thread(runnable);
-				ProgressBarWindow spProgressBar = new ProgressBarWindow(mainBuild, "Построение ВП...");
-				spProgressBar.placeAtCenter();
-				spProgressBar.getShell().setActive();
-				runnable.setPB(spProgressBar);
-				mainBuild.start();
 			}
 		});
 		

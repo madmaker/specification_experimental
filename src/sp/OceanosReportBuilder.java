@@ -56,6 +56,6 @@ public class OceanosReportBuilder
 		{
 			e.printStackTrace();
 		}
-		report.report = PDFBuilder.xml2pdf(report.data, ((PDFBuilderConfiguration)report.getConfiguration()).getTemplateStream(), ((PDFBuilderConfiguration)report.getConfiguration()).getConfigStream());
+		report.report = PDFBuilder.xml2pdf(report.data, ((PDFBuilderConfiguration)report.configuration).getTemplateStream(), ((PDFBuilderConfiguration)report.configuration).getConfigStream());
 	}
 }

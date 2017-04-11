@@ -17,6 +17,7 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import sp.Report;
 import sp.SP;
 import sp.StampData;
 import sp.SP.FormField;
@@ -43,7 +44,7 @@ public class XmlBuilder
 	private int currentLineNum = 1;
 	private int currentPageNum = 1;
 	
-	private SPBlockList blockList;
+	private Report report;
 	private ArrayList<String> globalRemark = null;
 
 	public XmlBuilder(XmlBuilderConfiguration configuration)
@@ -59,6 +60,8 @@ public class XmlBuilder
 	public File buildXml()
 	{
 		try{
+			checkData();
+			
 			node = document.createElement("FileData");
 			node.setAttribute("FileName", "Файл спецификации: " + SP.settings.getStringProperty("OBOZNACH") + ".pdf/0");			
 			node_root.appendChild(node);
@@ -67,8 +70,7 @@ public class XmlBuilder
 			node.setAttribute("ShowAdditionalForm", SPSettings.doShowAdditionalForm==true?"true":"false");
 			node_root.appendChild(node);
 			
-			blockList = specification.blockList;
-			ListIterator<SPBlock> iterator = blockList.iterator();
+			ListIterator<SPBlock> iterator = report.blockList.iterator();
 			SPBlock block;
 			if (node_block == null) {
 				node_block = document.createElement("Block");
@@ -239,5 +241,11 @@ public class XmlBuilder
 	{
 		if(currentPageNum==1) return (configuration.MaxLinesOnFirstPage - currentLineNum + 1);
 		return (configuration.MaxLinesOnOtherPage - currentLineNum + 1);
+	}
+	
+	private void checkData()
+	{
+		if(blockList == null)
+			throw new RuntimeException("No data to build xml with.");
 	}
 }

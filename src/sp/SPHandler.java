@@ -32,18 +32,14 @@ public class SPHandler extends AbstractHandler
 		specification = new SP();
 		specification.progressMonitor = pd;
 		
-		readSettings(specification.blockList);
+		readSettings((SPBlockList)specification.report.blockList);
 		
 		SPDialog spDialog = new SPDialog(HandlerUtil.getActiveShell(event).getShell(), SWT.CLOSE, specification);
-		
 		spDialog.open();
-		for(int i = 0; i < specification.blockList.size(); i++){
-			if(specification.blockList.get(i).getLines()!=null) System.out.println("Size of " + specification.blockList.get(i).title + " = " + specification.blockList.get(i).getLines().size());
-		}
 		
 		if (!SPSettings.isOKPressed) { return null; }
 		
-		saveSettings(specification.blockList);
+		saveSettings((SPBlockList)specification.report.blockList);
 		
 		specification.buildXmlFile();
 		specification.buildReportFile();

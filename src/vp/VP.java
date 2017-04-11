@@ -6,6 +6,7 @@ import com.teamcenter.rac.kernel.TCComponentBOMLine;
 import com.teamcenter.rac.kernel.TCComponentItemRevision;
 
 import sp.Report;
+import vp.vpblock.VPBlockList;
 
 public class VP
 {
@@ -20,5 +21,6 @@ public class VP
 	public VP()
 	{
 		report = new Report("My VP Report");
+		report.blockList = new VPBlockList();
 	}
 }

@@ -3,9 +3,10 @@ package vp.vpblock;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
+import reports.BlockList;
 import vp.vpblock.VPBlock.BlockContentType;
 
-public class VPBlockList
+public class VPBlockList extends BlockList
 {
 	private LinkedList<VPBlock> list;
 

@@ -40,13 +40,13 @@ public class SP
 
 	public ProgressMonitorDialog progressMonitor;
 	public StampData stampData;
-	public SPBlockList blockList;
-	private Report report;
+	public Report report;
 
 	public SP()
 	{
 		stampData = new StampData();
 		report = new Report("My SP Report");
+		report.blockList = new SPBlockList();
 	}
 	
 	public void readData()
@@ -72,7 +72,7 @@ public class SP
 		InputStream config = SP.class.getResourceAsStream("/pdf/OceanosUserconfig.xsl");
 		PDFBuilderConfiguration A4pdfBuilderconfiguration = new PDFBuilderConfiguration(template, config);
 		
-		report.setConfiguration(A4pdfBuilderconfiguration);
+		report.configuration = A4pdfBuilderconfiguration;
 		
 		OceanosReportBuilder reportBuilder = new OceanosReportBuilder(report);
 	}

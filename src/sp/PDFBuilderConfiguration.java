@@ -2,6 +2,8 @@ package sp;
 
 import java.io.InputStream;
 
+import reports.ReportConfiguration;
+
 public class PDFBuilderConfiguration extends ReportConfiguration
 {
 	private InputStream templateStream;

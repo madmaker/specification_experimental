@@ -1,4 +1,4 @@
-package sp;
+package reports;
 
 public abstract class ReportConfiguration
 {

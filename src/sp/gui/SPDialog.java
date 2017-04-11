@@ -101,7 +101,7 @@ public class SPDialog extends Dialog
 	 */
 
 	private void fillContents(){
-		SPBlockList blockList = specification.blockList;
+		SPBlockList blockList = (SPBlockList)specification.report.blockList;
 		ListIterator<SPBlock> iterator = blockList.iterator();
 		SPBlock block;
 		TableItem blockItem;
@@ -480,7 +480,7 @@ public class SPDialog extends Dialog
 				specification.stampData.normCheckDate = dateNCheck.getText().equals("Дата не установлена.")?null:fixData(dateNCheck.getText());
 				specification.stampData.approveDate = dateApprover.getText().equals("Дата не установлена.")?null:fixData(dateApprover.getText());
 				
-				SPBlockList blockList = specification.blockList;
+				SPBlockList blockList = (SPBlockList)specification.report.blockList;
 				int j = 0;
 				for(int i = 0; i < table.getItemCount(); i++){
 					TableItem tableItem = table.getItem(i);

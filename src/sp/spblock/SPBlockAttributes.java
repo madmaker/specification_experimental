@@ -1,9 +1,10 @@
 package sp.spblock;
 
+import reports.BlockAttributes;
 import sp.spblock.SPBlock.BlockContentType;
 import sp.spblock.SPBlock.BlockType;
 
-public class SPBlockAttributes
+public class SPBlockAttributes extends BlockAttributes
 {
 	public int				reserveLinesCount;
 	public int				reservePosCount;

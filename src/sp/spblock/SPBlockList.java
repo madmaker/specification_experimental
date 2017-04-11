@@ -3,28 +3,24 @@ package sp.spblock;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
+import reports.BlockList;
 import sp.spblock.SPBlock.BlockContentType;
 import sp.spblock.SPBlock.BlockType;
 
-public class SPBlockList
+public class SPBlockList extends BlockList
 {
-	private LinkedList<SPBlock> list;
-
+	protected LinkedList<SPBlock> list;
+	
 	public SPBlockList()
 	{
-		this.list = new LinkedList<SPBlock>();
-	}
-
-	public void addBlock(SPBlock block)
-	{
-		list.addLast(block);
+		list = new LinkedList<SPBlock>();
 	}
 
 	public SPBlock getBlock(BlockContentType contentType)
 	{
 		for (SPBlock block : list)
 		{
-			if (block.attributes.contentType == contentType)
+			if ((block).attributes.contentType == contentType)
 				return block;
 		}
 		return null;
@@ -39,7 +35,12 @@ public class SPBlockList
 		}
 		return null;
 	}
-
+	
+	public void addBlock(SPBlock block)
+	{
+		list.addLast(block);
+	}
+	
 	public void remove(int i)
 	{
 		list.remove(i);
