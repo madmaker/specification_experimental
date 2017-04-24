@@ -2,8 +2,10 @@ package sp;
 
 public class Error
 {
-  public Error()
-  {
-    
-  }
+	String text;
+
+	public Error(String text)
+	{
+		this.text = text;
+	}
 }

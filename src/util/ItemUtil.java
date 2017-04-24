@@ -1,5 +1,9 @@
 package util;
 
+import com.teamcenter.rac.kernel.TCComponent;
+import com.teamcenter.rac.kernel.TCException;
+import com.teamcenter.rac.kernel.TCProperty;
+
 public class ItemUtil
 {
 	private static CreateItemsOutput[] createItems(final ItemIdsAndInitialRevisionIds[] itemIds, final String itemType, final String itemName, final String itemDesc)
@@ -45,7 +49,7 @@ public class ItemUtil
 		return myNewIds;
 	}
 	
-	static boolean isComponentHasReleasedStatus(TCComponent comp) throws TCException {
+	public static boolean isComponentHasReleasedStatus(TCComponent comp) throws TCException {
 		boolean out = false;
 		TCComponent[] statuses = null;
 		TCProperty statusProp = comp.getTCProperty("release_status_list");

@@ -18,14 +18,16 @@ import sp.xml.XmlBuilderConfiguration;
 
 public class SP
 {
-	public static enum FormField {FORMAT, ZONE, POSITION, ID, NAME, QUANTITY, REMARK};
-	
+	public static enum FormField {
+		FORMAT, ZONE, POSITION, ID, NAME, QUANTITY, REMARK
+	};
+
 	public static TCComponentBOMLine topBOMLine;
 	public static TCComponentItem topBOMLineI;
 	public static TCComponentItemRevision topBOMLineIR;
 	public static TCComponentItemRevision topBOMLinePrevIR;
 	public static TCComponentItemRevision spIR;
-	
+
 	public static Map<BlockContentType, String> blockTitles = new HashMap<BlockContentType, String>();
 	static {
 		blockTitles.put(BlockContentType.DOCS, "Документация");
@@ -49,6 +51,11 @@ public class SP
 		report.blockList = new SPBlockList();
 	}
 	
+	public void init()
+	{
+		
+	}
+
 	public void readData()
 	{
 		DataReader dataReader = new DataReader(this);
@@ -62,7 +69,7 @@ public class SP
 
 		XmlBuilder xmlBuilder = new XmlBuilder(A4xmlBuilderConfiguration);
 		File data = xmlBuilder.buildXml();
-		
+
 		report.data = data;
 	}
 
@@ -71,14 +78,14 @@ public class SP
 		InputStream template = SP.class.getResourceAsStream("/pdf/OceanosSpecPDFTemplate.xsl");
 		InputStream config = SP.class.getResourceAsStream("/pdf/OceanosUserconfig.xsl");
 		PDFBuilderConfiguration A4pdfBuilderconfiguration = new PDFBuilderConfiguration(template, config);
-		
+
 		report.configuration = A4pdfBuilderconfiguration;
-		
+
 		OceanosReportBuilder reportBuilder = new OceanosReportBuilder(report);
 	}
-	
+
 	public void initReportConfigurations()
 	{
-		
+
 	}
 }

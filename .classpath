@@ -14,6 +14,7 @@
 	<classpathentry kind="lib" path="lib/org.eclipse.jface_3.8.0.v20120521-2332.jar"/>
 	<classpathentry kind="lib" path="lib/org.eclipse.core.runtime_3.8.0.v20120521-2346.jar"/>
 	<classpathentry kind="lib" path="lib/org.eclipse.equinox.common_3.6.100.v20120522-1841.jar"/>
+	<classpathentry kind="lib" path="lib/com.teamcenter.rac.pse_10000.1.0.jar"/>
 	<classpathentry kind="src" path="pdf"/>
 	<classpathentry kind="lib" path="/ru.idealplm.xml2pdf/jar/xml2pdf.jar"/>
 	<classpathentry kind="lib" path="lib/org.eclipse.core.commands_3.6.1.v20120521-2332.jar"/>

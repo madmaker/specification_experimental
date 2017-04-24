@@ -15,6 +15,8 @@ import org.eclipse.swt.widgets.Text;
 
 import com.teamcenter.rac.kernel.TCException;
 
+import sp.SP;
+import vp.VP;
 import vp.VPSettings;
 
 public class VPDialog extends Dialog
@@ -24,13 +26,13 @@ public class VPDialog extends Dialog
 
 	public boolean addSpareLine = false;
 	
-	
 	protected Object result;
 	protected static Shell shell;
 	private Table table;
 	private Text text;
 	private Composite blockArea;
 
+	private VP vp;
 
 	public static Display getDisplay() {
 		return display;
@@ -41,9 +43,10 @@ public class VPDialog extends Dialog
 	 * @param parent
 	 * @param style
 	 */
-	public VPDialog(Shell parent, int style) {
+	
+	public VPDialog(Shell parent, int style, VP vp) {
 		super(parent, style);
-		setText("SWT Dialog");
+		this.vp = vp;
 	}
 
 	/**
