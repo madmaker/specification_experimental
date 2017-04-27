@@ -12,8 +12,6 @@ import com.teamcenter.rac.kernel.TCSession;
 
 import sp.gui.SPDialog;
 import sp.spblock.SPBlock;
-import sp.spblock.SPBlock.BlockContentType;
-import sp.spblock.SPBlock.BlockType;
 import sp.spblock.SPBlockList;
 
 public class SPHandler extends AbstractHandler

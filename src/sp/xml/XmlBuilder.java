@@ -23,8 +23,6 @@ import sp.StampData;
 import sp.SP.FormField;
 import sp.SPSettings;
 import sp.spblock.SPBlockList;
-import sp.spblock.SPBlock.BlockContentType;
-import sp.spblock.SPBlock.BlockType;
 import sp.spblock.SPBlock;
 import sp.spline.SPLine;
 

@@ -10,13 +10,13 @@ public abstract class SPBlock
 	public SPBlockAttributes	attributes;
 	private ArrayList<SPLine>	lines;
 	
-	public static enum BlockContentType {
+	/*public static enum BlockContentType {
 		NONE, DOCS, COMPLEXES, ASSEMBLIES, DETAILS, STANDARDS, OTHERS, MATERIALS, KITS
 	};
 
 	public static enum BlockType {
 		DEFAULT, ME
-	};
+	};*/
 
 	public SPBlock(String title, SPBlockAttributes attributes)
 	{
@@ -32,7 +32,7 @@ public abstract class SPBlock
 
 	public boolean isValid()
 	{
-		return (size() > 0 && attributes.areValid());
+		return (size() > 0 && attributes.isValid());
 	}
 
 	public int size()

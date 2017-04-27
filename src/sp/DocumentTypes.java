@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 import com.teamcenter.rac.kernel.TCPreferenceService;
 
-import sp.spblock.SPBlock.BlockContentType;
+import reports.BlockContentType;
 
 public class DocumentTypes
 {
@@ -18,7 +18,7 @@ public class DocumentTypes
 	public DocumentTypes()
 	{
 		loadValuesFormFile(new File(this.getClass().getClassLoader().getResource("doc_types.txt").getFile()),
-				BlockContentType.DOCS);
+				BlockContentType.DOCUMENTS);
 		// loadValuesFromTCPref(DocTypesTCPropName, BlockContentType.DOCS);
 		// loadValuesFromTCPref(KitTypesTCPropName, BlockContentType.KITS);
 	}
@@ -28,7 +28,7 @@ public class DocumentTypes
 		this.types = types;
 	}
 
-	public void loadValuesFromTCPref(String preferenceName, BlockContentType targetBlockType)
+	public void loadValuesFromTCPref(String preferenceName, int targetBlockType)
 	{
 		String shortName;
 		String longName;
@@ -46,7 +46,7 @@ public class DocumentTypes
 		}
 	}
 
-	private void loadValuesFormFile(File file, BlockContentType targetBlockType)
+	private void loadValuesFormFile(File file, int targetBlockType)
 	{
 		String shortName;
 		String longName;

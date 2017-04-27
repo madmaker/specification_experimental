@@ -1,16 +1,16 @@
 package sp.spblock;
 
 import reports.BlockAttributes;
-import sp.spblock.SPBlock.BlockContentType;
-import sp.spblock.SPBlock.BlockType;
+import reports.BlockContentType;
+import reports.BlockType;
 
-public class SPBlockAttributes extends BlockAttributes
+public class SPBlockAttributes implements BlockAttributes
 {
 	public int				reserveLinesCount;
 	public int				reservePosCount;
 	public int				intervalPosCount;
-	public BlockType		type;
-	public BlockContentType	contentType;
+	public String		type;
+	public String			contentType;
 
 	public SPBlockAttributes()
 	{
@@ -21,7 +21,7 @@ public class SPBlockAttributes extends BlockAttributes
 		this.contentType = BlockContentType.NONE;
 	}
 
-	public boolean areValid()
+	public boolean isValid()
 	{
 		int errors = 0;
 		if (reserveLinesCount < 0)

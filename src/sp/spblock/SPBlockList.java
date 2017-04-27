@@ -7,7 +7,7 @@ import reports.BlockList;
 import sp.spblock.SPBlock.BlockContentType;
 import sp.spblock.SPBlock.BlockType;
 
-public class SPBlockList extends BlockList
+public class SPBlockList implements BlockList
 {
 	protected LinkedList<SPBlock> list;
 	
