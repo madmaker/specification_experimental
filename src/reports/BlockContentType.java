@@ -43,6 +43,13 @@ public class BlockContentType
 		return titles.get(NONE);
 	}
 	
+	public static boolean existsBlockWithTitle(String title)
+	{
+		if(titles.containsValue(title))
+			return true;
+		return false;
+	}
+	
 	private static void mapTypeToTitle(int type, String title) throws InvalidAttributesException
 	{
 		if (titles.put(type, title) != null) 

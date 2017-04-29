@@ -5,11 +5,9 @@ import java.util.Date;
 public class DateUtil
 {
 	static public enum Month {
-		JAN, FEB, MAR, APR, MAY, JUN, JUL, AUG, SEP, OCT, NOV, DEC, –Ø–ù–í, –§–ï–í, –ú–ê–†, –ê–ü–†, –ú–ê–ô, –ò–Æ–ù, –ò–Æ–õ, –ê–í–ì, –°–ï–ù, –û–ö–¢, –ù–û–Ø, –î–ï–ö
+		JAN, FEB, MAR, APR, MAY, JUN, JUL, AUG, SEP, OCT, NOV, DEC, ﬂÕ¬, ‘≈¬, Ã¿–, ¿œ–, Ã¿…, »ﬁÕ, »ﬁÀ, ¿¬√, —≈Õ, Œ “, ÕŒﬂ, ƒ≈ 
 	}
 
-	// –ü–∞—Ä—Å–∏—Ç –¥–∞—Ç—É –∏ –≤–æ–∑–≤—Ä–∞—â–∞–µ—Ç –µ—ë –≤ —Ñ–æ—Ä–º–∞—Ç–µ –î–î.–ú–ú.–ì–ì
-	// –í—Ö–æ–¥–Ω—ã–µ –¥–∞–Ω–Ω—ã–µ: 19 –ò—é–ª 2016 18:11
 	public static String parseDateFromTC(String tcDate)
 	{
 		String out = ""; // was " ", not ""
@@ -21,51 +19,51 @@ public class DateUtil
 
 			Month mo = Month.valueOf(stMo);
 			switch (mo) {
-			case –Ø–ù–í:
+			case ﬂÕ¬:
 			case JAN:
 				out += ".01.";
 				break;
-			case –§–ï–í:
+			case ‘≈¬:
 			case FEB:
 				out += ".02.";
 				break;
-			case –ú–ê–†:
+			case Ã¿–:
 			case MAR:
 				out += ".03.";
 				break;
-			case –ê–ü–†:
+			case ¿œ–:
 			case APR:
 				out += ".04.";
 				break;
-			case –ú–ê–ô:
+			case Ã¿…:
 			case MAY:
 				out += ".05.";
 				break;
-			case –ò–Æ–ù:
+			case »ﬁÕ:
 			case JUN:
 				out += ".06.";
 				break;
-			case –ò–Æ–õ:
+			case »ﬁÀ:
 			case JUL:
 				out += ".07.";
 				break;
-			case –ê–í–ì:
+			case ¿¬√:
 			case AUG:
 				out += ".08.";
 				break;
-			case –°–ï–ù:
+			case —≈Õ:
 			case SEP:
 				out += ".09.";
 				break;
-			case –û–ö–¢:
+			case Œ “:
 			case OCT:
 				out += ".10.";
 				break;
-			case –ù–û–Ø:
+			case ÕŒﬂ:
 			case NOV:
 				out += ".11.";
 				break;
-			case –î–ï–ö:
+			case ƒ≈ :
 			case DEC:
 				out += ".12.";
 				break;
@@ -92,7 +90,6 @@ public class DateUtil
 
 	public static Date getDateFormSimpleString(String s_date)
 	{
-		// –í—Ö–æ–¥–Ω—ã–µ –¥–∞–Ω–Ω—ã–µ: 
 		int year = Integer.parseInt(s_date.substring(s_date.lastIndexOf(".")+1, s_date.length()))+100;
 		int month = Integer.parseInt(s_date.substring(s_date.indexOf(".")+1, s_date.lastIndexOf(".")));
 		int date = Integer.parseInt(s_date.substring(0, s_date.indexOf(".")));

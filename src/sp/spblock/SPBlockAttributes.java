@@ -9,8 +9,8 @@ public class SPBlockAttributes implements BlockAttributes
 	public int				reserveLinesCount;
 	public int				reservePosCount;
 	public int				intervalPosCount;
-	public String		type;
-	public String			contentType;
+	public int				type;
+	public int				contentType;
 
 	public SPBlockAttributes()
 	{

@@ -3,9 +3,8 @@ package sp.spblock;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
+import reports.Block;
 import reports.BlockList;
-import sp.spblock.SPBlock.BlockContentType;
-import sp.spblock.SPBlock.BlockType;
 
 public class SPBlockList implements BlockList
 {
@@ -16,7 +15,7 @@ public class SPBlockList implements BlockList
 		list = new LinkedList<SPBlock>();
 	}
 
-	public SPBlock getBlock(BlockContentType contentType)
+	public SPBlock getBlock(int contentType)
 	{
 		for (SPBlock block : list)
 		{
@@ -26,7 +25,7 @@ public class SPBlockList implements BlockList
 		return null;
 	}
 	
-	public SPBlock getBlock(BlockContentType contentType, BlockType type)
+	public SPBlock getBlock(int contentType, int type)
 	{
 		for (SPBlock block : list)
 		{
@@ -46,19 +45,9 @@ public class SPBlockList implements BlockList
 		list.remove(i);
 	}
 	
-	public SPBlock get(int i)
-	{
-		return list.get(i);
-	}
-	
 	public int size()
 	{
 		return list.size();
-	}
-	
-	public SPBlock getLast()
-	{
-		return list.getLast();
 	}
 	
 	public ListIterator<SPBlock> iterator()

@@ -22,10 +22,10 @@ import org.eclipse.swt.widgets.Text;
 
 import com.teamcenter.rac.util.DateButton;
 
+import reports.BlockContentType;
 import sp.SP;
 import sp.SPSettings;
 import sp.spblock.SPBlockList;
-import sp.spblock.SPBlock.BlockType;
 import sp.spblock.SPBlock;
 import util.DateUtil;
 
@@ -322,7 +322,7 @@ public class SPDialog extends Dialog
 				while (index < table.getItemCount()) {
 					boolean visible = false;
 					final TableItem item = table.getItem(index);
-					if(!SP.blockTitles.containsValue(item.getText(0))) {
+					if(!BlockContentType.existsBlockWithTitle(item.getText(0))) {
 						index++;
 						continue;
 					};

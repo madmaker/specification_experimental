@@ -18,7 +18,7 @@
          point="org.eclipse.ui.handlers">
       <handler
             commandId="IdealUnitSpecificationExperimental.commands.sampleCommand"
-            class="idealunitspecificationexperimental.handlers.SampleHandler">
+            class="idealunitspecificationexperimental.sp.SPHandler">
       </handler>
    </extension>
    <extension

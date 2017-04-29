@@ -10,6 +10,7 @@ import org.eclipse.ui.handlers.HandlerUtil;
 import com.teamcenter.rac.aifrcp.AIFUtility;
 import com.teamcenter.rac.kernel.TCSession;
 
+import reports.BlockType;
 import sp.gui.SPDialog;
 import sp.spblock.SPBlock;
 import sp.spblock.SPBlockList;
@@ -54,7 +55,7 @@ public class SPHandler extends AbstractHandler
 			String[] props = blockProps.split(":");
 			if(props.length!=4) continue;
 			System.out.println(props[0]);
-			SPBlock block = blockList.getBlock(BlockContentType.values()[Character.getNumericValue(props[0].charAt(0))], props[0].charAt(1)=='0'?BlockType.DEFAULT:BlockType.ME);
+			SPBlock block = blockList.getBlock(Character.getNumericValue(props[0].charAt(0)), Character.getNumericValue(props[0].charAt(1)));
 			if(block!=null){
 				block.attributes.reservePosCount = Integer.parseInt(props[1]);
 				block.attributes.reserveLinesCount = Integer.parseInt(props[2]);
@@ -67,7 +68,7 @@ public class SPHandler extends AbstractHandler
 		String settingsString = "";
 		String del = ":";
 		for(int i = 0; i < blockList.size(); i++){
-			settingsString+=blockList.get(i).attributes.contentType.ordinal()+(blockList.get(i).attributes.type==BlockType.DEFAULT?"0":"1")+del+blockList.get(i).attributes.reservePosCount+del+blockList.get(i).attributes.reserveLinesCount+del+blockList.get(i).attributes.intervalPosCount;
+			settingsString+=blockList.get(i).attributes.contentType+blockList.get(i).attributes.type+del+blockList.get(i).attributes.reservePosCount+del+blockList.get(i).attributes.reserveLinesCount+del+blockList.get(i).attributes.intervalPosCount;
 			settingsString+="&";
 		}
 		if(settingsString.endsWith("&")){

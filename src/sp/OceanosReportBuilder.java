@@ -3,7 +3,7 @@ package sp;
 import java.io.File;
 import java.io.IOException;
 
-import ru.idealplm.xml2pdf.handlers.PDFBuilder;
+import ru.idealplm.xml2pdf2.handlers.PDFBuilder;
 import util.FileUtil;
 
 public class OceanosReportBuilder
