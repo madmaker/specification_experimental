@@ -1,10 +1,10 @@
 package reports;
 
-public abstract class BlockList
+public interface BlockList<T extends Block>
 {
-	public void add(Block block);
-	public Block get(int i);
-	public Block getLast();
-	public void remove(Block block);
+	public void add(T block);
+	public T get(int i);
+	public T getLast();
+	public void remove(T block);
 	public void remove(int i);
 }

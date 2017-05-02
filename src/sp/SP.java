@@ -10,6 +10,8 @@ import org.eclipse.jface.dialogs.ProgressMonitorDialog;
 import com.teamcenter.rac.kernel.TCComponentBOMLine;
 import com.teamcenter.rac.kernel.TCComponentItem;
 import com.teamcenter.rac.kernel.TCComponentItemRevision;
+import com.teamcenter.rac.kernel.TCException;
+import com.teamcenter.rac.pse.plugin.Activator;
 
 import sp.spblock.SPBlockList;
 import sp.xml.XmlBuilder;
@@ -40,7 +42,14 @@ public class SP
 	
 	public void init()
 	{
-		
+		try{
+			topBOMLine = Activator.getPSEService().getTopBOMLine();
+			topBOMLineI = topBOMLine.getItem();
+			topBOMLineIR = topBOMLine.getItemRevision();
+		} catch (TCException ex) {
+			ex.printStackTrace();
+			throw new RuntimeException("Error while initializing");
+		}
 	}
 
 	public void readData()

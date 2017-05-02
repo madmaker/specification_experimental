@@ -2,14 +2,11 @@ package sp.spline;
 
 import com.teamcenter.rac.kernel.TCComponentBOMLine;
 
-import sp.spblock.SPBlock.BlockContentType;
-import sp.spblock.SPBlock.BlockType;
-
 public abstract class SPLine
 {
 	public SPLineAttributes attributes;
-	public BlockContentType blockContentType;
-	public BlockType blockType;
+	public int blockContentType;
+	public int blockType;
 	public boolean isSubstitute = false;
 	public boolean isNameNotApproved = false;
 	public int height = 1;

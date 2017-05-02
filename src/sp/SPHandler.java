@@ -31,6 +31,9 @@ public class SPHandler extends AbstractHandler
 		specification = new SP();
 		specification.progressMonitor = pd;
 		
+		specification.init();
+		specification.readData();
+		
 		readSettings((SPBlockList)specification.report.blockList);
 		
 		SPDialog spDialog = new SPDialog(HandlerUtil.getActiveShell(event).getShell(), SWT.CLOSE, specification);

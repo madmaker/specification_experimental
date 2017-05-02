@@ -2,21 +2,14 @@ package sp.spblock;
 
 import java.util.ArrayList;
 
+import reports.Block;
 import sp.spline.SPLine;
 
-public abstract class SPBlock
+public class SPBlock extends Block
 {
 	public String				title;
 	public SPBlockAttributes	attributes;
 	private ArrayList<SPLine>	lines;
-	
-	/*public static enum BlockContentType {
-		NONE, DOCS, COMPLEXES, ASSEMBLIES, DETAILS, STANDARDS, OTHERS, MATERIALS, KITS
-	};
-
-	public static enum BlockType {
-		DEFAULT, ME
-	};*/
 
 	public SPBlock(String title, SPBlockAttributes attributes)
 	{
@@ -40,7 +33,7 @@ public abstract class SPBlock
 		return lines.size();
 	};
 
-	public abstract void addLine(SPLine line);
+	public void addLine(SPLine line){};
 
-	public abstract void updateLine(SPLine target, SPLine source);
+	public void updateLine(SPLine target, SPLine source){};
 }

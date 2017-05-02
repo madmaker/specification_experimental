@@ -6,7 +6,7 @@ import java.util.ListIterator;
 import reports.Block;
 import reports.BlockList;
 
-public class SPBlockList implements BlockList
+public class SPBlockList implements BlockList<SPBlock>
 {
 	protected LinkedList<SPBlock> list;
 	
@@ -53,5 +53,33 @@ public class SPBlockList implements BlockList
 	public ListIterator<SPBlock> iterator()
 	{
 		return list.listIterator();
+	}
+
+	@Override
+	public void add(SPBlock block)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public SPBlock get(int i)
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public SPBlock getLast()
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void remove(SPBlock block)
+	{
+		// TODO Auto-generated method stub
+		
 	}
 }

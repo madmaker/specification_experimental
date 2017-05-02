@@ -1,6 +1,6 @@
 package reports;
 
-public interface Block
+public abstract class Block
 {
 	
 }
