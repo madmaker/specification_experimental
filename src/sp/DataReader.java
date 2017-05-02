@@ -11,6 +11,7 @@ import com.teamcenter.rac.kernel.TCComponent;
 import com.teamcenter.rac.kernel.TCComponentBOMLine;
 import com.teamcenter.rac.kernel.TCComponentItemRevision;
 import com.teamcenter.rac.kernel.TCException;
+import com.teamcenter.rac.util.MessageBox;
 import com.teamcenter.services.rac.cad.StructureManagementService;
 import com.teamcenter.services.rac.cad._2007_01.StructureManagement.ExpandPSData;
 import com.teamcenter.services.rac.cad._2007_01.StructureManagement.ExpandPSOneLevelInfo;
@@ -64,18 +65,27 @@ public class DataReader
 	
 			ExpandPSOneLevelResponse levelResp = smsService.expandPSOneLevel(levelInfo, levelPref);
 	
-			if (levelResp.output.length > 0) {
-				monitor.beginTask("Чтение данных структуры сборки", levelResp.output.length);
-				for (ExpandPSOneLevelOutput levelOut : levelResp.output) {
-					System.out.println(levelResp.output.length + " : child lines");
-					monitor.worked(1);
-					for (ExpandPSData psData : levelOut.children) {
-						System.out.println(psData.bomLine.getProperty("bl_line_name"));
-						//expandBOMLines(psData.bomLine);
-					}
-					if(monitor.isCanceled())
+			if (levelResp.output.length > 0)
+			{
+				for (ExpandPSOneLevelOutput levelOut : levelResp.output)
+				{
+					monitor.beginTask("Чтение данных структуры сборки", levelOut.children.length);
+					for (ExpandPSData psData : levelOut.children)
 					{
-						throw new CancellationException("Чтение данных структуры сборки было отменено");
+						monitor.worked(1);
+						/*** Для отладки ***/
+						System.out.println(psData.bomLine.getProperty("bl_line_name"));
+						try {
+							Thread.sleep(100);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+						/*** Для отладки ***/
+						if(monitor.isCanceled())
+						{
+							break;
+							//throw new CancellationException("Чтение данных структуры сборки было отменено");
+						}
 					}
 				}
 				monitor.done();

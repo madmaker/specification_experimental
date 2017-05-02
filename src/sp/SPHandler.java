@@ -34,17 +34,17 @@ public class SPHandler extends AbstractHandler
 		specification.init();
 		specification.readData();
 		
-		readSettings((SPBlockList)specification.report.blockList);
-		
-		SPDialog spDialog = new SPDialog(HandlerUtil.getActiveShell(event).getShell(), SWT.CLOSE, specification);
-		spDialog.open();
-		
-		if (!SPSettings.isOKPressed) { return null; }
-		
-		saveSettings((SPBlockList)specification.report.blockList);
-		
-		specification.buildXmlFile();
-		specification.buildReportFile();
+//		readSettings((SPBlockList)specification.report.blockList);
+//		
+//		SPDialog spDialog = new SPDialog(HandlerUtil.getActiveShell(event).getShell(), SWT.CLOSE, specification);
+//		spDialog.open();
+//		
+//		if (!SPSettings.isOKPressed) { return null; }
+//		
+//		saveSettings((SPBlockList)specification.report.blockList);
+//		
+//		specification.buildXmlFile();
+//		specification.buildReportFile();
 
 		return null;
 	}

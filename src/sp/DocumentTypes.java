@@ -17,10 +17,11 @@ public class DocumentTypes
 
 	public DocumentTypes()
 	{
-		loadValuesFormFile(new File(this.getClass().getClassLoader().getResource("doc_types.txt").getFile()),
-				BlockContentType.DOCUMENTS);
-		// loadValuesFromTCPref(DocTypesTCPropName, BlockContentType.DOCS);
-		// loadValuesFromTCPref(KitTypesTCPropName, BlockContentType.KITS);
+		types = new ArrayList<DocumentType>();
+		//loadValuesFormFile(new File(this.getClass().getClassLoader().getResource("doc_types.txt").getFile()),
+		//		BlockContentType.DOCUMENTS);
+		loadValuesFromTCPref(DocTypesTCPropName, BlockContentType.DOCUMENTS);
+		loadValuesFromTCPref(KitTypesTCPropName, BlockContentType.KITS);
 	}
 
 	public void setDocumentTypes(ArrayList<DocumentType> types)
