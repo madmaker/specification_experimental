@@ -485,9 +485,10 @@ public class SPDialog extends Dialog
 				for(int i = 0; i < table.getItemCount(); i++){
 					TableItem tableItem = table.getItem(i);
 					if(tableItem.getText(0).startsWith("Устанавливается")) continue;
-					blockList.get(j).attributes.reservePosCount = Integer.parseInt(tableItem.getText(1).isEmpty()?"0":tableItem.getText(1));
-					blockList.get(j).attributes.reserveLinesCount = Integer.parseInt(tableItem.getText(2).isEmpty()?"0":tableItem.getText(2));
-					blockList.get(j).attributes.intervalPosCount = Integer.parseInt(tableItem.getText(3).isEmpty()?"0":tableItem.getText(3));
+					SPBlock block = (SPBlock) blockList.get(j);
+					block.attributes.reservePosCount = Integer.parseInt(tableItem.getText(1).isEmpty()?"0":tableItem.getText(1));
+					block.attributes.reserveLinesCount = Integer.parseInt(tableItem.getText(2).isEmpty()?"0":tableItem.getText(2));
+					block.attributes.intervalPosCount = Integer.parseInt(tableItem.getText(3).isEmpty()?"0":tableItem.getText(3));
 					j++;
 				}
 				/*ListIterator<Block> iterator = blockList.listIterator();

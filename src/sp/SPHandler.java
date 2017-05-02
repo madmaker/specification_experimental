@@ -68,7 +68,8 @@ public class SPHandler extends AbstractHandler
 		String settingsString = "";
 		String del = ":";
 		for(int i = 0; i < blockList.size(); i++){
-			settingsString+=blockList.get(i).attributes.contentType+blockList.get(i).attributes.type+del+blockList.get(i).attributes.reservePosCount+del+blockList.get(i).attributes.reserveLinesCount+del+blockList.get(i).attributes.intervalPosCount;
+			SPBlock block = (SPBlock) blockList.get(i);
+			settingsString+=block.attributes.contentType+block.attributes.type+del+block.attributes.reservePosCount+del+block.attributes.reserveLinesCount+del+block.attributes.intervalPosCount;
 			settingsString+="&";
 		}
 		if(settingsString.endsWith("&")){

@@ -1,6 +1,6 @@
 package reports;
 
-public interface BlockList
+public abstract class BlockList
 {
 	public void add(Block block);
 	public Block get(int i);
