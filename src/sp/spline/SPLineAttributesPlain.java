@@ -19,6 +19,12 @@ public class SPLineAttributesPlain
 	
 	public SPLineAttributesPlain()
 	{
-		
+		format = new SLFormat("");
+		zone = new SLZone("");
+		remark = new SLRemark("");
+		position = "";
+		id = "";
+		name = new ArrayList<String>();
+		quantity = new BigDecimal(0);
 	}
 }

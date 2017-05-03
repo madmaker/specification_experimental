@@ -11,11 +11,6 @@ public class SLRemark
 {
 	private List<String> remark = new ArrayList<String>(2);
 
-	public SLRemark()
-	{
-		remark = new ArrayList<String>();
-	}
-
 	public SLRemark(String remark)
 	{
 		this.remark.add(remark);
