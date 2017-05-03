@@ -72,7 +72,7 @@ public class SP
 	public void buildReportFile()
 	{
 		InputStream template = SP.class.getResourceAsStream("/pdf/OceanosSpecPDFTemplate.xsl");
-		InputStream config = SP.class.getResourceAsStream("/pdf/OceanosUserconfig.xsl");
+		InputStream config = SP.class.getResourceAsStream("/pdf/OceanosSpecUserconfig.xsl");
 		PDFBuilderConfiguration A4pdfBuilderconfiguration = new PDFBuilderConfiguration(template, config);
 
 		report.configuration = A4pdfBuilderconfiguration;
