@@ -23,8 +23,8 @@ import util.DateUtil;
 
 public class DataReader
 {
-	DocumentTypes documentTypes = new DocumentTypes();
 	StructureManagementService smsService = StructureManagementService.getService(SPHandler.session);
+	private DocumentTypes documentTypes = new DocumentTypes();
 	private SP specification;
 	private ProgressMonitorDialog pd;
 	
@@ -83,8 +83,7 @@ public class DataReader
 						/*** Для отладки ***/
 						if(monitor.isCanceled())
 						{
-							break;
-							//throw new CancellationException("Чтение данных структуры сборки было отменено");
+							throw new CancellationException("Чтение данных структуры сборки было отменено");
 						}
 					}
 				}
@@ -107,11 +106,11 @@ public class DataReader
 					specification.stampData.techCheck = signForm.getProperty("oc9_TCheck");
 					specification.stampData.normCheck = signForm.getProperty("oc9_NCheck");
 					specification.stampData.approve = signForm.getProperty("oc9_Approver");
-					String designDate = signForm.getProperty("oc9_DesignDate").equals("")?null:DateUtil.parseDateFromTC(signForm.getProperty("oc9_DesignDate"));
-					String checkDate = signForm.getProperty("oc9_CheckDate").equals("")?null:DateUtil.parseDateFromTC(signForm.getProperty("oc9_CheckDate"));
-					String tCheckDate = signForm.getProperty("oc9_TCheckDate").equals("")?null:DateUtil.parseDateFromTC(signForm.getProperty("oc9_TCheckDate"));
-					String nCheckDate = signForm.getProperty("oc9_NCheckDate").equals("")?null:DateUtil.parseDateFromTC(signForm.getProperty("oc9_NCheckDate"));
-					String approveDate = signForm.getProperty("oc9_ApproveDate").equals("")?null:DateUtil.parseDateFromTC(signForm.getProperty("oc9_ApproveDate"));
+					String designDate = DateUtil.parseDateFromTC(signForm.getProperty("oc9_DesignDate"));
+					String checkDate = DateUtil.parseDateFromTC(signForm.getProperty("oc9_CheckDate"));
+					String tCheckDate = DateUtil.parseDateFromTC(signForm.getProperty("oc9_TCheckDate"));
+					String nCheckDate = DateUtil.parseDateFromTC(signForm.getProperty("oc9_NCheckDate"));
+					String approveDate = DateUtil.parseDateFromTC(signForm.getProperty("oc9_ApproveDate"));
 					specification.stampData.designDate = designDate;
 					specification.stampData.checkDate = checkDate;
 					specification.stampData.techCheckDate = tCheckDate;

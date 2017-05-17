@@ -11,7 +11,7 @@ public class DateUtil
 	public static String parseDateFromTC(String tcDate)
 	{
 		String out = ""; // was " ", not ""
-		if (tcDate.length() > 0) {
+		if (tcDate.trim().length() > 0) {
 			String stDate = tcDate.substring(0, 2);
 			out = stDate;
 
