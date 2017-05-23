@@ -11,6 +11,7 @@ import com.teamcenter.rac.aifrcp.AIFUtility;
 import com.teamcenter.rac.kernel.TCSession;
 
 import reports.BlockType;
+import reports.EnumBlockType;
 import sp.gui.SPDialog;
 import sp.spblock.SPBlock;
 import sp.spblock.SPBlockList;
@@ -58,7 +59,7 @@ public class SPHandler extends AbstractHandler
 			String[] props = blockProps.split(":");
 			if(props.length!=4) continue;
 			System.out.println(props[0]);
-			SPBlock block = blockList.getBlock(Character.getNumericValue(props[0].charAt(0)), Character.getNumericValue(props[0].charAt(1)));
+			SPBlock block = blockList.getBlock(EnumBlockType.values()[Character.getNumericValue(props[0].charAt(0))], Character.getNumericValue(props[0].charAt(1)));
 			if(block!=null){
 				block.attributes.reservePosCount = Integer.parseInt(props[1]);
 				block.attributes.reserveLinesCount = Integer.parseInt(props[2]);
@@ -72,7 +73,7 @@ public class SPHandler extends AbstractHandler
 		String del = ":";
 		for(int i = 0; i < blockList.size(); i++){
 			SPBlock block = (SPBlock) blockList.get(i);
-			settingsString+=block.attributes.contentType+block.attributes.type+del+block.attributes.reservePosCount+del+block.attributes.reserveLinesCount+del+block.attributes.intervalPosCount;
+			settingsString+=block.attributes.contentType.ordinal()+block.attributes.type+del+block.attributes.reservePosCount+del+block.attributes.reserveLinesCount+del+block.attributes.intervalPosCount;
 			settingsString+="&";
 		}
 		if(settingsString.endsWith("&")){

@@ -1,12 +1,14 @@
 package sp;
 
+import reports.EnumBlockType;
+
 public class DocumentType
 {
 	public String			shortName;
 	public String			longName;
-	public int				type;
+	public EnumBlockType	type;
 
-	public DocumentType(String shortName, String longName, int type)
+	public DocumentType(String shortName, String longName, EnumBlockType type)
 	{
 		this.shortName = shortName;
 		this.longName = longName;

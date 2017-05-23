@@ -8,6 +8,7 @@ import java.util.Scanner;
 import com.teamcenter.rac.kernel.TCPreferenceService;
 
 import reports.BlockContentType;
+import reports.EnumBlockType;
 
 public class DocumentTypes
 {
@@ -20,16 +21,42 @@ public class DocumentTypes
 		types = new ArrayList<DocumentType>();
 		//loadValuesFormFile(new File(this.getClass().getClassLoader().getResource("doc_types.txt").getFile()),
 		//		BlockContentType.DOCUMENTS);
-		loadValuesFromTCPref(DocTypesTCPropName, BlockContentType.DOCUMENTS);
-		loadValuesFromTCPref(KitTypesTCPropName, BlockContentType.KITS);
+		loadValuesFromTCPref(DocTypesTCPropName, EnumBlockType.DOCUMENTS);
+		loadValuesFromTCPref(KitTypesTCPropName, EnumBlockType.KITS);
 	}
 
 	public void setDocumentTypes(ArrayList<DocumentType> types)
 	{
 		this.types = types;
 	}
+	
+	public DocumentType getType(String input)
+	{
+		DocumentType result = new DocumentType("", "", EnumBlockType.NONE);
+		String symbolPart = input.replaceAll("[^А-Яа-я]+", "");
 
-	public void loadValuesFromTCPref(String preferenceName, int targetBlockType)
+		for (DocumentType type : types)
+		{
+			if (type.shortName.equals(input) && type.shortName.length() == input.length())
+			{
+				result = type;
+				break;
+			}
+			else if (type.equals(symbolPart) && type.shortName.length() != input.length())
+			{
+				result = type;
+			}
+			else if (type.equals(symbolPart) && type.shortName.length() == input.length())
+			{
+				result = type;
+				break;
+			}
+		}
+
+		return result;
+	}
+
+	public void loadValuesFromTCPref(String preferenceName, EnumBlockType targetBlockType)
 	{
 		String shortName;
 		String longName;
@@ -47,7 +74,7 @@ public class DocumentTypes
 		}
 	}
 
-	private void loadValuesFormFile(File file, int targetBlockType)
+	private void loadValuesFormFile(File file, EnumBlockType targetBlockType)
 	{
 		String shortName;
 		String longName;
@@ -75,31 +102,5 @@ public class DocumentTypes
 				e.printStackTrace();
 			}
 		}
-	}
-
-	private String getType(String input)
-	{
-		String result = null;
-		String symbolPart = input.replaceAll("[^А-Яа-я]+", "");
-
-		for (DocumentType type : types)
-		{
-			if (type.shortName.equals(input) && type.shortName.length() == input.length())
-			{
-				result = type.longName;
-				break;
-			}
-			else if (type.equals(symbolPart) && type.shortName.length() != input.length())
-			{
-				result = type.longName;
-			}
-			else if (type.equals(symbolPart) && type.shortName.length() == input.length())
-			{
-				result = type.longName;
-				break;
-			}
-		}
-
-		return result;
 	}
 }

@@ -10,4 +10,9 @@ public class ErrorList
 	{
 		this.errors = new ArrayList<Error>();
 	}
+	
+	public void storeError(Error error)
+	{
+		errors.add(error);
+	}
 }

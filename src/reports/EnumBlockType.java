@@ -4,47 +4,47 @@ public enum EnumBlockType
 {
 	NONE {
 		public String title(){
-			return "Неопределённый тип раздела";
+			return "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ";
 		}
 	},
 	DOCUMENTS {
 		public String title(){
-			return "Документация";
+			return "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ";
 		}
 	},
 	COMPLEXES {
 		public String title(){
-			return "Комплексы";
+			return "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ";
 		}
 	},
 	ASSEMBLIES {
 		public String title(){
-			return "Сборочные единицы";
+			return "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ";
 		}
 	},
 	DETAILS {
 		public String title(){
-			return "Детали";
+			return "пїЅпїЅпїЅпїЅпїЅпїЅ";
 		}
 	},
 	STANDARDS {
 		public String title(){
-			return "Стандартные изделия";
+			return "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ";
 		}
 	},
 	OTHERS {
 		public String title(){
-			return "Прочие изделия";
+			return "пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ";
 		}
 	},
 	MATERIALS {
 		public String title(){
-			return "Материалы";
+			return "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ";
 		}
 	},
 	KITS {
 		public String title(){
-			return "Комплекты";
+			return "пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ";
 		}
 	};
 	

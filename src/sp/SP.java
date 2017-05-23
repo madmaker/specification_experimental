@@ -32,12 +32,14 @@ public class SP
 	public ProgressMonitorDialog progressMonitor;
 	public StampData stampData;
 	public Report report;
+	public ErrorList errorList;
 
 	public SP()
 	{
 		stampData = new StampData();
 		report = new Report("My SP Report");
 		report.blockList = new SPBlockList();
+		errorList = new ErrorList();
 	}
 	
 	public void init()
@@ -78,6 +80,12 @@ public class SP
 		report.configuration = A4pdfBuilderconfiguration;
 
 		OceanosReportBuilder reportBuilder = new OceanosReportBuilder(report);
+	}
+	
+	public void uploadReportFile()
+	{
+		ReportUploader uploader = new ReportUploader();
+		uploader.addToTeamcenter();
 	}
 
 	public void initReportConfigurations()

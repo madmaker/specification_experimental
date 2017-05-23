@@ -5,20 +5,29 @@
    <extension
          point="org.eclipse.ui.commands">
       <category
-            name="Sample Category"
+            name="Ideal Reports"
             id="IdealUnitSpecificationExperimental.commands.category">
       </category>
       <command
-            name="Sample Command"
+            name="SP Command"
             categoryId="IdealUnitSpecificationExperimental.commands.category"
-            id="IdealUnitSpecificationExperimental.commands.sampleCommand">
+            id="IdealUnitSpecificationExperimental.commands.spCommand">
+      </command>
+      <command
+            name="VP Command"
+            categoryId="IdealUnitSpecificationExperimental.commands.category"
+            id="IdealUnitSpecificationExperimental.commands.vpCommand">
       </command>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
       <handler
-            commandId="IdealUnitSpecificationExperimental.commands.sampleCommand"
+            commandId="IdealUnitSpecificationExperimental.commands.spCommand"
             class="sp.SPHandler">
+      </handler>
+      <handler
+            commandId="IdealUnitSpecificationExperimental.commands.vpCommand"
+            class="vp.VPHandler">
       </handler>
    </extension>
    <extension
@@ -35,12 +44,18 @@
       <menuContribution
             locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
          <toolbar
-               id="IdealUnitSpecificationExperimental.toolbars.sampleToolbar">
+               id="IdealUnitSpecificationExperimental.toolbars.reportsToolbar">
             <command
-                  commandId="IdealUnitSpecificationExperimental.commands.sampleCommand"
+                  commandId="IdealUnitSpecificationExperimental.commands.spCommand"
                   icon="icons/sample.gif"
-                  tooltip="Say hello world"
-                  id="IdealUnitSpecificationExperimental.toolbars.sampleCommand">
+                  tooltip="Build SP"
+                  id="IdealUnitSpecificationExperimental.toolbars.spCommand">
+            </command>
+            <command
+                  commandId="IdealUnitSpecificationExperimental.commands.vpCommand"
+                  icon="icons/sample.gif"
+                  tooltip="Build VP"
+                  id="IdealUnitSpecificationExperimental.toolbars.vpCommand">
             </command>
          </toolbar>
       </menuContribution>

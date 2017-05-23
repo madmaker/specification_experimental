@@ -3,6 +3,7 @@ package sp.spblock;
 import reports.BlockAttributes;
 import reports.BlockContentType;
 import reports.BlockType;
+import reports.EnumBlockType;
 
 public class SPBlockAttributes implements BlockAttributes
 {
@@ -10,7 +11,7 @@ public class SPBlockAttributes implements BlockAttributes
 	public int				reservePosCount;
 	public int				intervalPosCount;
 	public int				type;
-	public int				contentType;
+	public EnumBlockType	contentType;
 
 	public SPBlockAttributes()
 	{
@@ -18,7 +19,7 @@ public class SPBlockAttributes implements BlockAttributes
 		this.reservePosCount = 0;
 		this.intervalPosCount = 0;
 		this.type = BlockType.DEFAULT;
-		this.contentType = BlockContentType.NONE;
+		this.contentType = EnumBlockType.NONE;
 	}
 
 	public boolean isValid()
@@ -30,7 +31,7 @@ public class SPBlockAttributes implements BlockAttributes
 			errors++;
 		if (intervalPosCount < 0)
 			errors++;
-		if (contentType == BlockContentType.NONE)
+		if (contentType == EnumBlockType.NONE)
 			errors++;
 		return (errors == 0);
 	}

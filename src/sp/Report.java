@@ -4,13 +4,14 @@ import java.io.File;
 
 import reports.BlockList;
 import reports.ReportConfiguration;
+import sp.spblock.SPBlockList;
 
 public class Report
 {
 	public enum ReportType {PDF, XLS}
 	
 	public String name;
-	public BlockList blockList;
+	public SPBlockList blockList;
 	public File data;
 	public File report;
 	public ReportConfiguration configuration;

@@ -6,6 +6,7 @@ import java.util.ListIterator;
 
 import reports.Block;
 import reports.BlockList;
+import reports.EnumBlockType;
 
 public class SPBlockList implements BlockList<SPBlock>
 {
@@ -16,17 +17,17 @@ public class SPBlockList implements BlockList<SPBlock>
 		list = new LinkedList<SPBlock>();
 	}
 
-	public SPBlock getBlock(int contentType)
+	public SPBlock getBlock(EnumBlockType contentType)
 	{
 		for (SPBlock block : list)
 		{
-			if ((block).attributes.contentType == contentType)
+			if (block.attributes.contentType == contentType)
 				return block;
 		}
 		return null;
 	}
 	
-	public SPBlock getBlock(int contentType, int type)
+	public SPBlock getBlock(EnumBlockType contentType, int type)
 	{
 		for (SPBlock block : list)
 		{
