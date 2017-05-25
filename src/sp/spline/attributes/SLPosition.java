@@ -1,41 +1,41 @@
 package sp.spline.attributes;
 
-public class SLName implements SPLineAttribute
+public class SLPosition implements SPLineAttribute
 {
-	private String name = "";
+	private String position = "";
 	
-	public SLName(String name)
+	public SLPosition(String value)
 	{
-		this.name = name;
+		setValue(value);
 	}
-
+	
 	@Override
 	public String getStringValue()
 	{
-		return name;
+		return position;
 	}
 
 	@Override
 	public void setValue(String value)
 	{
-		this.name = value;
+		this.position = value;
 	}
 
 	@Override
 	public void updateValueWith(String value)
 	{
-		this.name = value;
+		this.position = value;
 	}
 
 	@Override
 	public void updateValueWith(SPLineAttribute value)
 	{
-		this.name = value.getStringValue();
+		this.position = value.getStringValue();
 	}
 
 	@Override
 	public void clearValue()
 	{
-		name = "";
+		this.position = "";
 	}
 }

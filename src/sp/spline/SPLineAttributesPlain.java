@@ -1,30 +1,31 @@
 package sp.spline;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-
 import sp.spline.attributes.SLFormat;
+import sp.spline.attributes.SLId;
+import sp.spline.attributes.SLName;
+import sp.spline.attributes.SLPosition;
+import sp.spline.attributes.SLQuantity;
 import sp.spline.attributes.SLRemark;
 import sp.spline.attributes.SLZone;
 
 public class SPLineAttributesPlain
 {
-	private SLFormat			format;
-	private SLZone				zone;
-	private SLRemark			remark;
-	private String				position;
-	private String				id;
-	private ArrayList<String>	name;
-	private BigDecimal			quantity;
-	
+	public SLFormat format;
+	public SLZone zone;
+	public SLRemark remark;
+	public SLPosition position;
+	public SLId id;
+	public SLName name;
+	public SLQuantity quantity;
+
 	public SPLineAttributesPlain()
 	{
-		format = new SLFormat("");
-		zone = new SLZone("");
-		remark = new SLRemark("");
-		position = "";
-		id = "";
-		name = new ArrayList<String>();
-		quantity = new BigDecimal(0);
+		format = new SLFormat();
+		zone = new SLZone();
+		remark = new SLRemark();
+		position = new SLPosition("");
+		id = new SLId("");
+		name = new SLName("");
+		quantity = new SLQuantity("0");
 	}
 }

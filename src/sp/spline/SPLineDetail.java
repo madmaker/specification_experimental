@@ -2,9 +2,9 @@ package sp.spline;
 
 import com.teamcenter.rac.kernel.TCComponentBOMLine;
 
-public class DetailSpecLine extends SPLine
+public class SPLineDetail extends SPLine
 {
-	public DetailSpecLine()
+	public SPLineDetail()
 	{
 		this.attributes = new DetailSpecLineAttributes();
 	}
@@ -21,10 +21,16 @@ public class DetailSpecLine extends SPLine
 
 	public String getUid()
 	{
-    
+		return this.uid;
 	}
 
-	private SPLine newLine(TCComponentBOMLine bomLine)
+	public SPLine newLine(TCComponentBOMLine bomLine)
+	{
+		return null;
+	}
+
+	@Override
+	public void updateWith(SPLine line)
 	{
 	};
 }

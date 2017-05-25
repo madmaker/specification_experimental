@@ -1,41 +1,41 @@
 package sp.spline.attributes;
 
-public class SLName implements SPLineAttribute
+public class SLId implements SPLineAttribute
 {
-	private String name = "";
+	private String id = "";
 	
-	public SLName(String name)
+	public SLId(String id)
 	{
-		this.name = name;
+		this.id = id;
 	}
 
 	@Override
 	public String getStringValue()
 	{
-		return name;
+		return id;
 	}
 
 	@Override
 	public void setValue(String value)
 	{
-		this.name = value;
+		this.id = value;
 	}
 
 	@Override
 	public void updateValueWith(String value)
 	{
-		this.name = value;
+		this.id = value;
 	}
 
 	@Override
 	public void updateValueWith(SPLineAttribute value)
 	{
-		this.name = value.getStringValue();
+		this.id = value.getStringValue();
 	}
 
 	@Override
 	public void clearValue()
 	{
-		name = "";
+		id = "";
 	}
 }

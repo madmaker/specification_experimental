@@ -6,17 +6,17 @@ import java.util.Arrays;
 
 import sp.SP;
 import sp.SP.FormField;
-import sp.spline.attributes.SLFormat;
-import sp.spline.attributes.SLRemark;
-import sp.spline.attributes.SLZone;
+import sp.spline.attributes._SLFormat;
+import sp.spline.attributes._SLRemark;
+import sp.spline.attributes._SLZone;
 import sp.xml.XmlBuilderConfiguration;
 import util.LineUtil;
 
 public abstract class SPLineAttributes
 {
-	private SLFormat			format;
-	private SLZone				zone;
-	private SLRemark			remark;
+	private _SLFormat			format;
+	private _SLZone				zone;
+	private _SLRemark			remark;
 	private String				position;
 	private String				id;
 	private ArrayList<String>	name;
@@ -28,14 +28,14 @@ public abstract class SPLineAttributes
 
 	public void setFormat(String format)
 	{
-		this.format = new SLFormat(format);
+		this.format = new _SLFormat(format);
 	}
 
 	public void setZone(String zone)
 	{
 		if (this.zone == null)
 		{
-			this.zone = new SLZone(zone);
+			this.zone = new _SLZone(zone);
 		}
 		else
 		{
@@ -46,7 +46,7 @@ public abstract class SPLineAttributes
 	public void setRemark(String remark)
 	{
 		if (this.remark == null)
-			this.remark = new SLRemark();
+			this.remark = new _SLRemark(remark);
 		this.remark.insert(remark);
 	}
 
@@ -62,7 +62,7 @@ public abstract class SPLineAttributes
 
 	public void setName(String name)
 	{
-		this.name = LineUtil.getFittedLines(name, XmlBuilderConfiguration.columnLengths.get(SP.FormField.NAME));
+//		this.name = LineUtil.getFittedLines(name, XmlBuilderConfiguration.columnLengths.get(SP.FormField.NAME));
 	}
 
 	public void setQuantity(String quantity)
@@ -75,12 +75,12 @@ public abstract class SPLineAttributes
 		this.quantity = this.quantity.add(new BigDecimal("".equals(quantity) ? "1" : quantity));
 	}
 
-	public SLFormat getFormat()
+	public _SLFormat getFormat()
 	{
 		return format;
 	}
 
-	public SLZone getZone()
+	public _SLZone getZone()
 	{
 		return zone;
 	}
@@ -105,7 +105,7 @@ public abstract class SPLineAttributes
 		return quantity;
 	}
 
-	public SLRemark getRemark()
+	public _SLRemark getRemark()
 	{
 		return remark;
 	}

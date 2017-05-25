@@ -15,6 +15,7 @@ public class DocumentTypes
 	private final String			DocTypesTCPropName	= "Oc9_Spec_DocumentTypesPriority";
 	private final String			KitTypesTCPropName	= "Oc9_Spec_DocumentComplexTypesPriority";
 	private ArrayList<DocumentType>	types;
+	public static DocumentType    	dummyType = new DocumentType("", "", EnumBlockType.NONE);
 
 	public DocumentTypes()
 	{
@@ -32,7 +33,7 @@ public class DocumentTypes
 	
 	public DocumentType getType(String input)
 	{
-		DocumentType result = new DocumentType("", "", EnumBlockType.NONE);
+		DocumentType result = dummyType;
 		String symbolPart = input.replaceAll("[^А-Яа-я]+", "");
 
 		for (DocumentType type : types)

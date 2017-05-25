@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 public class SLKits
 {
-	private ArrayList<String>	ids;
-	private ArrayList<String>	names;
-	private ArrayList<Integer>	qtys;
-	private double				totalQuantity;
+	private ArrayList<String> ids;
+	private ArrayList<String> names;
+	private ArrayList<Integer> qtys;
+	private double totalQuantity;
 
 	public SLKits()
 	{
@@ -20,11 +20,9 @@ public class SLKits
 	public void addKit(String id, String name, int qty)
 	{
 		int pos = ids.indexOf(id);
-		if (pos != -1)
-		{
+		if (pos != -1) {
 			qtys.set(pos, qtys.get(pos) + qty);
-		} else
-		{
+		} else {
 			ids.add(id);
 			names.add(name);
 			qtys.add(qty);
@@ -33,10 +31,8 @@ public class SLKits
 
 	public void addKits(SLKits kits)
 	{
-		if (kits != null)
-		{
-			for (int i = 0; i < kits.ids.size(); i++)
-			{
+		if (kits != null) {
+			for (int i = 0; i < kits.ids.size(); i++) {
 				addKit(kits.ids.get(i), kits.names.get(i), kits.qtys.get(i));
 			}
 		}
@@ -45,13 +41,11 @@ public class SLKits
 	public ArrayList<String> getKits()
 	{
 		ArrayList<String> result = new ArrayList<String>();
-		if (ids.size() == 1 && qtys.get(0) == 1)
-		{
+		if (ids.size() == 1 && qtys.get(0) == 1) {
 			result.add("из компл. " + names.get(0));
 			return result;
 		}
-		for (int i = 0; i < ids.size(); i++)
-		{
+		for (int i = 0; i < ids.size(); i++) {
 			result.add(qtys.get(i) + " шт. из компл. " + names.get(i));
 		}
 		return result;
