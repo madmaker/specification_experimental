@@ -86,6 +86,7 @@ public class DataReader
 			SP.spIR = documentItemRevision;
 			readSPDocumentRevisionData(documentItemRevision);
 			readStampDataFromGeneralNoteForm(documentItemRevision);
+			readBlockSettings(documentItemRevision);
 		} else {
 			createSPLineFromDocumentItemRevision(documentItemRevision);
 		}
@@ -163,7 +164,6 @@ public class DataReader
 					specification.errorList.storeError(new Error("Набор данных заблокирован."));
 				}
 			}
-
 		}
 	}
 
@@ -224,8 +224,8 @@ public class DataReader
 	private void readStampDataFromGeneralNoteForm(TCComponentItemRevision documentItemRevision)
 	{
 		try {
-			TCComponent signForm;
-			if ((signForm = documentItemRevision.getRelatedComponent("Oc9_SignRel")) != null) {
+			TCComponent signForm = documentItemRevision.getRelatedComponent("Oc9_SignRel");
+			if (signForm != null) {
 				specification.stampData.design = signForm.getProperty("oc9_Designer");
 				specification.stampData.check = signForm.getProperty("oc9_Check");
 				specification.stampData.techCheck = signForm.getProperty("oc9_TCheck");
@@ -242,8 +242,17 @@ public class DataReader
 				specification.stampData.normCheckDate = nCheckDate;
 				specification.stampData.approveDate = approveDate;
 			}
-			if (documentItemRevision.getRelatedComponent("IMAN_master_form_rev") != null) {
-				SPSettings.blockSettings = documentItemRevision.getRelatedComponent("IMAN_master_form_rev").getProperty("object_desc");
+		} catch (TCException ex) {
+			ex.printStackTrace();
+		}
+	}
+
+	private void readBlockSettings(TCComponentItemRevision documentItemRevision)
+	{
+		try {
+			TCComponent masterForm = documentItemRevision.getRelatedComponent("IMAN_master_form_rev");
+			if (masterForm != null) {
+				SPSettings.blockSettings = masterForm.getProperty("object_desc");
 			}
 		} catch (TCException ex) {
 			ex.printStackTrace();
@@ -253,7 +262,7 @@ public class DataReader
 	private void checkIfMonitorIsCancelled(IProgressMonitor monitor)
 	{
 		if (monitor.isCanceled()) {
-			throw new CancellationException("Чтение данных структуры сборки было отменено");
+			throw new CancellationException("Чтение данных было отменено");
 		}
 	}
 }
