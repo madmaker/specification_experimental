@@ -1,6 +1,6 @@
 package sp.spline;
 
-public class DetailSpecLineAttributes extends SPLineAttributes
+public class DetailSpecLineAttributes extends SPLineAttributesPlain
 {
   public DetailSpecLineAttributes()
   {

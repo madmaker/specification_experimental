@@ -35,14 +35,14 @@ public class SPHandler extends AbstractHandler
 		specification.init();
 		specification.readData();
 		
-//		readSettings((SPBlockList)specification.report.blockList);
-//		
-//		SPDialog spDialog = new SPDialog(HandlerUtil.getActiveShell(event).getShell(), SWT.CLOSE, specification);
-//		spDialog.open();
-//		
-//		if (!SPSettings.isOKPressed) { return null; }
-//		
-//		saveSettings((SPBlockList)specification.report.blockList);
+		readSettings(specification.report.blockList);
+		
+		SPDialog spDialog = new SPDialog(HandlerUtil.getActiveShell(event).getShell(), SWT.CLOSE, specification);
+		spDialog.open();
+		
+		if (!SPSettings.isOKPressed) { return null; }
+		
+		saveSettings(specification.report.blockList);
 //		
 //		specification.buildXmlFile();
 //		specification.buildReportFile();
@@ -53,7 +53,6 @@ public class SPHandler extends AbstractHandler
 	void readSettings(SPBlockList blockList){
 		String settingsString = SPSettings.blockSettings;
 		System.out.println("BLOCK_SETTINGS"+settingsString);
-		if(settingsString==null || settingsString.isEmpty()) return;
 		for(String blockProps:settingsString.split("&")){
 			System.out.println(blockProps);
 			String[] props = blockProps.split(":");

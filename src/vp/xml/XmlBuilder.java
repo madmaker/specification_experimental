@@ -1,4 +1,4 @@
-package sp.xml;
+package vp.xml;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,14 +18,11 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import reports.EnumBlockType;
-import sp.Report;
-import sp.SP;
-import sp.StampData;
-import sp.SP.FormField;
-import sp.SPSettings;
-import sp.spblock.SPBlockList;
-import sp.spblock.SPBlock;
-import sp.spline.SPLine;
+import vp.Report;
+import vp.VP;
+import vp.VPSettings;
+import vp.vpblock.VPBlock;
+import vp.vpline.VPDataOcc;
 
 public class XmlBuilder
 {
@@ -62,15 +59,15 @@ public class XmlBuilder
 			checkData();
 			
 			node = document.createElement("FileData");
-			node.setAttribute("FileName", "Файл спецификации: " + /*SP.settings.getStringProperty("OBOZNACH") +*/ ".pdf/0");			
+			node.setAttribute("FileName", "Файл спецификации: " + VP.settings.getStringProperty("OBOZNACH") + ".pdf/0");			
 			node_root.appendChild(node);
 			
 			node = document.createElement("Settings");
-			node.setAttribute("ShowAdditionalForm", SPSettings.doShowAdditionalForm==true?"true":"false");
+			node.setAttribute("ShowAdditionalForm", VPSettings.doShowAdditionalForm==true?"true":"false");
 			node_root.appendChild(node);
 			
-			ListIterator<SPBlock> iterator = report.blockList.iterator();
-			SPBlock block;
+			ListIterator<VPBlock> iterator = report.blockList.iterator();
+			VPBlock block;
 			if (node_block == null) {
 				node_block = document.createElement("Block");
 			}
@@ -82,8 +79,7 @@ public class XmlBuilder
 			
 			Transformer transformer = TransformerFactory.newInstance().newTransformer();
 			DOMSource source = new DOMSource(document);
-//			File xmlFile = File.createTempFile(StampData.id+"_", ".xml");
-			File xmlFile = File.createTempFile("TESTING_SP_", ".xml");
+			File xmlFile = File.createTempFile(StampData.id+"_", ".xml");
 			StreamResult result = new StreamResult(xmlFile);
 			transformer.transform(source, result);
 			return xmlFile;
@@ -97,7 +93,7 @@ public class XmlBuilder
 		return null;
 	}
 	
-	public void processBlock(SPBlock block){
+	public void processBlock(VPBlock block){
 		if(block.getLines()!=null){
 			if (node_block == null) {
 				node_block = document.createElement("Block");
@@ -107,7 +103,7 @@ public class XmlBuilder
 			if(getFreeLinesNum() < 3 + block.getLines().get(0).height){
 				newPage();
 			}
-			if(report.blockList.getLast()==block && block.size()==1 && globalRemark!=null){
+			if(blockList.getLast()==block && block.size()==1 && globalRemark!=null){
 				if(getFreeLinesNum() < (globalRemark.size() + block.getLines().get(0).height + 2)){
 					newPage();
 				}
@@ -135,13 +131,13 @@ public class XmlBuilder
 		}
 	}
 	
-	public int countSublines(SPLine line)
+	public int countSublines(VPDataOcc line)
 	{
 		int result = 0;
-//		if(line.getAttachedLines() == null) return result;
-//		for(SPLine attachedLine : line.getAttachedLines()){
-//			result += attachedLine.lineHeight;
-//		}
+		if(line.getAttachedLines() == null) return result;
+		for(VPDataOcc attachedLine : line.getAttachedLines()){
+			result += attachedLine.lineHeight;
+		}
 		return result;
 	}
 	
@@ -155,8 +151,8 @@ public class XmlBuilder
 		addEmptyLines(1);
 	}
 	
-	public void newLine(SPBlock block, SPLine line){
-		boolean isLastLineInBlock = (block.getLines().get(block.getLines().size()-1)==line) && report.blockList.getLast()==block;
+	public void newLine(VPBlock block, VPDataOcc line){
+		boolean isLastLineInBlock = (block.getLines().get(block.getLines().size()-1)==line) && blockList.getLast()==block;
 		
 		if(isLastLineInBlock && (globalRemark!=null && getFreeLinesNum() < (globalRemark.size() + line.height + 1/*empty line before remark*/))){
 			newPage();
@@ -169,26 +165,26 @@ public class XmlBuilder
 			if(i==0){
 				node = document.createElement("Col_" + 1);
 				node.setAttribute("align", "center");
-				node.setTextContent(line.attributes.format.getStringValue());
+				node.setTextContent(line.attributes.getFormat().toString());
 				node_occ.appendChild(node);
 				node = document.createElement("Col_" + 2);
 				node.setAttribute("align", "center");
-				node.setTextContent(line.attributes.zone.getStringValue());
+				node.setTextContent(line.attributes.getZone().toString());
 				node_occ.appendChild(node);
 				node = document.createElement("Col_" + 3);
 				node.setAttribute("align", "center");
-				node.setTextContent(line.attributes.position.getStringValue());
+				node.setTextContent(line.attributes.getPosition());
 				node_occ.appendChild(node);
 				node = document.createElement("Col_" + 4);
-				node.setTextContent(line.attributes.id.getStringValue());
+				node.setTextContent(line.attributes.getId());
 				node_occ.appendChild(node);
 				node = document.createElement("Col_" + 6);
 				node.setAttribute("align", "center");
-				node.setTextContent(line.attributes.quantity.getStringValue().equals("-1")?" ":line.attributes.quantity.getStringValue());
+				node.setTextContent(line.attributes.getStringValueFromField(FormField.QUANTITY).equals("-1")?" ":line.attributes.getStringValueFromField(FormField.QUANTITY));
 				node_occ.appendChild(node);
 			}
 			node = document.createElement("Col_" + 5);
-			node.setTextContent(line.attributes.name.getStringValue());
+			node.setTextContent((line.attributes.getName()!=null && (i < line.attributes.getName().size())) ? line.attributes.getName().get(i) : "");
 			if(line.blockContentType==EnumBlockType.STANDARDS||line.blockContentType==EnumBlockType.OTHERS||line.blockContentType==EnumBlockType.MATERIALS){
 				if(line.isNameNotApproved){
 					node.setAttribute("warning", "true");
@@ -196,7 +192,7 @@ public class XmlBuilder
 			}
 			node_occ.appendChild(node);
 			node = document.createElement("Col_" + 7);
-			node.setTextContent(line.attributes.remark.getStringValue());
+			node.setTextContent((line.attributes.getRemark()!=null && (i < line.attributes.getRemark().size())) ? line.attributes.getRemark().get(i) : "");
 			node_occ.appendChild(node);
 			
 			node_block.appendChild(node_occ);
@@ -205,11 +201,11 @@ public class XmlBuilder
 		
 		currentLineNum += line.height;
 
-//		if(line.getAttachedLines()!=null){
-//			for(SPLine attachedLine : line.getAttachedLines()){
-//				newLine(block, attachedLine);
-//			}
-//		}
+		if(line.getAttachedLines()!=null){
+			for(VPDataOcc attachedLine : line.getAttachedLines()){
+				newLine(block, attachedLine);
+			}
+		}
 		
 		if(isLastLineInBlock && globalRemark!=null){
 			addEmptyLines(1);
@@ -245,7 +241,7 @@ public class XmlBuilder
 	
 	private void checkData()
 	{
-		if(report.blockList == null)
+		if(blockList == null)
 			throw new RuntimeException("No data to build xml with.");
 	}
 }

@@ -1,13 +1,13 @@
 package vp.vpblock;
 
-import vp.vpblock.VPBlock.BlockContentType;
+import reports.EnumBlockType;
 
 public class VPBlockAttributes
 {
-	public BlockContentType	contentType;
+	public EnumBlockType	contentType;
 
 	public VPBlockAttributes()
 	{
-		this.contentType = BlockContentType.NONE;
+		this.contentType = EnumBlockType.NONE;
 	}
 }

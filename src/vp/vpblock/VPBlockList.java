@@ -4,9 +4,9 @@ import java.util.LinkedList;
 import java.util.ListIterator;
 
 import reports.BlockList;
-import vp.vpblock.VPBlock.BlockContentType;
+import reports.EnumBlockType;
 
-public class VPBlockList extends BlockList
+public class VPBlockList implements BlockList<VPBlock>
 {
 	private LinkedList<VPBlock> list;
 
@@ -20,7 +20,7 @@ public class VPBlockList extends BlockList
 		list.addLast(block);
 	}
 
-	public VPBlock getBlock(BlockContentType contentType)
+	public VPBlock getBlock(EnumBlockType contentType)
 	{
 		for (VPBlock block : list)
 		{
@@ -48,5 +48,26 @@ public class VPBlockList extends BlockList
 	public ListIterator<VPBlock> iterator()
 	{
 		return list.listIterator();
+	}
+
+	@Override
+	public void add(VPBlock block)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public VPBlock getLast()
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void remove(VPBlock block)
+	{
+		// TODO Auto-generated method stub
+		
 	}
 }

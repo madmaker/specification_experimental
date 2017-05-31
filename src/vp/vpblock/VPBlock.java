@@ -1,6 +1,8 @@
 package vp.vpblock;
 
-public class VPBlock
+import reports.Block;
+
+public class VPBlock extends Block
 {
-	public static enum BlockContentType {NONE, DOCS, COMPLEXES, ASSEMBLIES, DETAILS, STANDARTS, RESTS, MATERIALS, KITS}
+	
 }

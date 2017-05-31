@@ -19,6 +19,7 @@ import vp.gui.VPDialog;
 public class VPHandler extends AbstractHandler
 {
 	public static TCSession session = (TCSession) AIFUtility.getCurrentApplication().getSession();
+	VP vp;
 	
 	public VPHandler()
 	{
@@ -28,7 +29,7 @@ public class VPHandler extends AbstractHandler
 	{
 		ProgressMonitorDialog pd = new ProgressMonitorDialog(HandlerUtil.getActiveShell(event).getShell());
 		
-		VP vp = new VP();
+		vp = new VP();
 		vp.progressMonitor = pd;
 		vp.init();
 		
@@ -43,8 +44,8 @@ public class VPHandler extends AbstractHandler
 			ErrorListDialog eld = new ErrorListDialog(HandlerUtil.getActiveShell(event).getShell(), vpValidator.errorList);
 		} else {
 			try {
-				EngineVP2G.initialize();
-				VPDialog dialog = new VPDialog(HandlerUtil.getActiveShell(event).getShell(), 1);
+				vp.init();
+				VPDialog dialog = new VPDialog(HandlerUtil.getActiveShell(event).getShell(), 1, vp);
 				dialog.open();			
 			} catch (TCException e) {
 				e.printStackTrace();

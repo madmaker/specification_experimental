@@ -4,7 +4,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 
-import reports.Block;
 import reports.BlockList;
 import reports.EnumBlockType;
 

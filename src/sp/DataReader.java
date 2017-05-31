@@ -23,16 +23,17 @@ import com.teamcenter.services.rac.cad._2007_01.StructureManagement.ExpandPSOneL
 import com.teamcenter.services.rac.cad._2007_01.StructureManagement.ExpandPSOneLevelResponse;
 
 import reports.EnumBlockType;
+import reports.Error;
 import sp.spline.SPLine;
 import sp.spline.SPLineDocument;
 import util.DateUtil;
 
 public class DataReader
 {
-	StructureManagementService smsService = StructureManagementService.getService(SPHandler.session);
-	private DocumentTypes documentTypes = new DocumentTypes();
-	private SP specification;
-	private ProgressMonitorDialog pd;
+	StructureManagementService		smsService		= StructureManagementService.getService(SPHandler.session);
+	private DocumentTypes			documentTypes	= new DocumentTypes();
+	private SP						specification;
+	private ProgressMonitorDialog	pd;
 
 	public DataReader(SP specification)
 	{
@@ -42,7 +43,8 @@ public class DataReader
 
 	public void readData()
 	{
-		try {
+		try
+		{
 			pd.run(true, true, new IRunnableWithProgress() {
 				public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException
 				{
@@ -52,9 +54,13 @@ public class DataReader
 					monitor.done();
 				}
 			});
-		} catch (InvocationTargetException | InterruptedException e) {
+		}
+		catch (InvocationTargetException | InterruptedException e)
+		{
 			e.printStackTrace();
-		} catch (CancellationException ex) {
+		}
+		catch (CancellationException ex)
+		{
 			SPSettings.isCancelled = true;
 			System.out.println(ex.getMessage());
 		}
@@ -64,12 +70,18 @@ public class DataReader
 	{
 		TCComponent[] documents = getDocumentsRelatedToItemRevision(SP.topBOMLineIR);
 		monitor.beginTask("Чтение данных связанной документации", documents.length);
-		for (TCComponent document : documents) {
-			try {
+		for (TCComponent document : documents)
+		{
+			try
+			{
 				readDocumentData((TCComponentItem) document);
-			} catch (Exception ex) {
+			}
+			catch (Exception ex)
+			{
 				ex.printStackTrace();
-			} finally {
+			}
+			finally
+			{
 				monitor.worked(1);
 				checkIfMonitorIsCancelled(monitor);
 			}
@@ -82,19 +94,23 @@ public class DataReader
 		String topBOMLineItemId = SP.topBOMLineIR.getProperty("item_id");
 		String documentItemId = documentItem.getProperty("item_id");
 
-		if (documentItemId.equals(topBOMLineItemId)) {
+		if (documentItemId.equals(topBOMLineItemId))
+		{
 			SP.spIR = documentItemRevision;
 			readSPDocumentRevisionData(documentItemRevision);
 			readStampDataFromGeneralNoteForm(documentItemRevision);
 			readBlockSettings(documentItemRevision);
-		} else {
+		}
+		else
+		{
 			createSPLineFromDocumentItemRevision(documentItemRevision);
 		}
 	}
 
 	private void createSPLineFromDocumentItemRevision(TCComponentItemRevision documentItemRevision)
 	{
-		try {
+		try
+		{
 			String documentItemId = documentItemRevision.getProperty("item_id");
 			String topBOMLineItemId = SP.topBOMLineIR.getProperty("item_id");
 			DocumentType documentType = documentTypes.getType(documentItemId);
@@ -105,29 +121,16 @@ public class DataReader
 			boolean isBaseDoc = true;
 			boolean gostNameIsFalse;
 
-			if (documentType.type == EnumBlockType.DOCUMENTS) {
+			if (documentType.type == EnumBlockType.DOCUMENTS)
+			{
 				gostNameIsFalse = documentItemRevision.getProperty("oc9_GOSTName").equalsIgnoreCase("нет");
 				isBaseDoc = documentItemId.substring(0, documentItemId.lastIndexOf(" ")).equals(topBOMLineItemId);
-				if (gostNameIsFalse || !isBaseDoc) {
+				if (gostNameIsFalse || !isBaseDoc)
+				{
 					name += object_name;
 				}
-				if (!gostNameIsFalse) {
-					name += "\n" + documentType.longName;
-				}
-
-				SPLineDocument resultBlockLine = new SPLineDocument();
-				resultBlockLine.attributes.format.setValue(format);
-				resultBlockLine.attributes.id.setValue(documentItemId);
-				resultBlockLine.attributes.name.setValue(name);
-				resultBlockLine.attributes.quantity.setValue("-1");
-				resultBlockLine.documentType = documentType;
-				resultBlockLine.build();
-				specification.report.blockList.getBlock(documentType.type).addLine(resultBlockLine);
-			} else if (documentType.type == EnumBlockType.KITS) {
-				gostNameIsFalse = documentItemRevision.getProperty("oc9_GOSTName").equalsIgnoreCase("нет");
-				isBaseDoc = documentItemId.substring(0, documentItemId.lastIndexOf(" ")).equals(topBOMLineItemId);
-				name += object_name;
-				if (!gostNameIsFalse) {
+				if (!gostNameIsFalse)
+				{
 					name += "\n" + documentType.longName;
 				}
 
@@ -140,27 +143,54 @@ public class DataReader
 				resultBlockLine.build();
 				specification.report.blockList.getBlock(documentType.type).addLine(resultBlockLine);
 			}
-		} catch (Exception ex) {
+			else if (documentType.type == EnumBlockType.KITS)
+			{
+				gostNameIsFalse = documentItemRevision.getProperty("oc9_GOSTName").equalsIgnoreCase("нет");
+				isBaseDoc = documentItemId.substring(0, documentItemId.lastIndexOf(" ")).equals(topBOMLineItemId);
+				name += object_name;
+				if (!gostNameIsFalse)
+				{
+					name += "\n" + documentType.longName;
+				}
+
+				SPLineDocument resultBlockLine = new SPLineDocument();
+				resultBlockLine.attributes.format.setValue(format);
+				resultBlockLine.attributes.id.setValue(documentItemId);
+				resultBlockLine.attributes.name.setValue(name);
+				resultBlockLine.attributes.quantity.setValue("-1");
+				resultBlockLine.documentType = documentType;
+				resultBlockLine.build();
+				specification.report.blockList.getBlock(documentType.type).addLine(resultBlockLine);
+			}
+		}
+		catch (Exception ex)
+		{
 			ex.printStackTrace();
 		}
 	}
 
 	private void readSPDocumentRevisionData(TCComponentItemRevision documentItemRevision)
 	{
-		try {
+		try
+		{
 			readStampDataFromExistingSPDocument(documentItemRevision);
 			checkIfSPDatasetIsCheckedOut(documentItemRevision);
-		} catch (Exception ex) {
+		}
+		catch (Exception ex)
+		{
 			ex.printStackTrace();
 		}
 	}
 
 	private void checkIfSPDatasetIsCheckedOut(TCComponentItemRevision documentItemRevision) throws Exception
 	{
-		for (AIFComponentContext compContext : documentItemRevision.getChildren()) {
+		for (AIFComponentContext compContext : documentItemRevision.getChildren())
+		{
 			if ((compContext.getComponent() instanceof TCComponentDataset)
-					&& compContext.getComponent().getProperty("object_desc").equals("Спецификация")) {
-				if (((TCComponent) compContext.getComponent()).isCheckedOut()) {
+					&& compContext.getComponent().getProperty("object_desc").equals("Спецификация"))
+			{
+				if (((TCComponent) compContext.getComponent()).isCheckedOut())
+				{
 					specification.errorList.storeError(new Error("Набор данных заблокирован."));
 				}
 			}
@@ -178,9 +208,12 @@ public class DataReader
 
 	private TCComponent[] getDocumentsRelatedToItemRevision(TCComponentItemRevision itemRevision)
 	{
-		try {
+		try
+		{
 			return itemRevision.getRelatedComponents("Oc9_DocRel");
-		} catch (TCException ex) {
+		}
+		catch (TCException ex)
+		{
 			ex.printStackTrace();
 			return new TCComponent[] {};
 		}
@@ -188,7 +221,8 @@ public class DataReader
 
 	private void readBOMData(IProgressMonitor monitor)
 	{
-		try {
+		try
+		{
 			ExpandPSOneLevelInfo levelInfo = new ExpandPSOneLevelInfo();
 			ExpandPSOneLevelPref levelPref = new ExpandPSOneLevelPref();
 
@@ -198,16 +232,22 @@ public class DataReader
 
 			ExpandPSOneLevelResponse levelResp = smsService.expandPSOneLevel(levelInfo, levelPref);
 
-			if (levelResp.output.length > 0) {
-				for (ExpandPSOneLevelOutput levelOut : levelResp.output) {
+			if (levelResp.output.length > 0)
+			{
+				for (ExpandPSOneLevelOutput levelOut : levelResp.output)
+				{
 					monitor.beginTask("Чтение данных структуры сборки", levelOut.children.length);
-					for (ExpandPSData psData : levelOut.children) {
+					for (ExpandPSData psData : levelOut.children)
+					{
 						monitor.worked(1);
 						/*** Для отладки ***/
 						System.out.println(psData.bomLine.getProperty("bl_line_name"));
-						try {
+						try
+						{
 							Thread.sleep(100);
-						} catch (InterruptedException e) {
+						}
+						catch (InterruptedException e)
+						{
 							e.printStackTrace();
 						}
 						/*** Для отладки ***/
@@ -216,16 +256,20 @@ public class DataReader
 				}
 				monitor.done();
 			}
-		} catch (TCException ex) {
+		}
+		catch (TCException ex)
+		{
 			ex.printStackTrace();
 		}
 	}
 
 	private void readStampDataFromGeneralNoteForm(TCComponentItemRevision documentItemRevision)
 	{
-		try {
+		try
+		{
 			TCComponent signForm = documentItemRevision.getRelatedComponent("Oc9_SignRel");
-			if (signForm != null) {
+			if (signForm != null)
+			{
 				specification.stampData.design = signForm.getProperty("oc9_Designer");
 				specification.stampData.check = signForm.getProperty("oc9_Check");
 				specification.stampData.techCheck = signForm.getProperty("oc9_TCheck");
@@ -242,26 +286,33 @@ public class DataReader
 				specification.stampData.normCheckDate = nCheckDate;
 				specification.stampData.approveDate = approveDate;
 			}
-		} catch (TCException ex) {
+		}
+		catch (TCException ex)
+		{
 			ex.printStackTrace();
 		}
 	}
 
 	private void readBlockSettings(TCComponentItemRevision documentItemRevision)
 	{
-		try {
+		try
+		{
 			TCComponent masterForm = documentItemRevision.getRelatedComponent("IMAN_master_form_rev");
-			if (masterForm != null) {
+			if (masterForm != null)
+			{
 				SPSettings.blockSettings = masterForm.getProperty("object_desc");
 			}
-		} catch (TCException ex) {
+		}
+		catch (TCException ex)
+		{
 			ex.printStackTrace();
 		}
 	}
 
 	private void checkIfMonitorIsCancelled(IProgressMonitor monitor)
 	{
-		if (monitor.isCanceled()) {
+		if (monitor.isCanceled())
+		{
 			throw new CancellationException("Чтение данных было отменено");
 		}
 	}

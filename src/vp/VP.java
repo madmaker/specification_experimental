@@ -11,16 +11,11 @@ import com.teamcenter.rac.kernel.TCComponentItemRevision;
 import com.teamcenter.rac.kernel.TCException;
 import com.teamcenter.rac.pse.plugin.Activator;
 
-import sp.ErrorList;
-import sp.OceanosReportBuilder;
-import sp.PDFBuilderConfiguration;
-import sp.Report;
-import sp.ReportUploader;
-import sp.SP;
-import sp.StampData;
-import sp.xml.XmlBuilder;
-import sp.xml.XmlBuilderConfiguration;
+import reports.ErrorList;
+import vp.Report;
 import vp.vpblock.VPBlockList;
+import vp.xml.XmlBuilder;
+import vp.xml.XmlBuilderConfiguration;
 
 public class VP
 {
@@ -73,8 +68,8 @@ public class VP
 
 	public void buildReportFile()
 	{
-		InputStream template = SP.class.getResourceAsStream("/pdf/OceanosSpecPDFTemplate.xsl");
-		InputStream config = SP.class.getResourceAsStream("/pdf/OceanosSpecUserconfig.xsl");
+		InputStream template = VP.class.getResourceAsStream("/pdf/OceanosVPPDFTemplate.xsl");
+		InputStream config = VP.class.getResourceAsStream("/pdf/OceanosVPUserconfig.xsl");
 		PDFBuilderConfiguration A4pdfBuilderconfiguration = new PDFBuilderConfiguration(template, config);
 
 		report.configuration = A4pdfBuilderconfiguration;

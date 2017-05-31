@@ -2,7 +2,7 @@ package sp.spline;
 
 import com.teamcenter.rac.kernel.TCComponentBOMLine;
 
-public class SPLineMaterial extends SPLine
+public class SPLineMaterial extends SPLine<MaterialSpecLineAttributes>
 {
 	public SPLineMaterial()
 	{
@@ -32,6 +32,12 @@ public class SPLineMaterial extends SPLine
 	@Override
 	public void updateWith(SPLine line)
 	{
+		
 	};
-
+	
+	@Override
+	public void setUid(String uid)
+	{
+		this.uid = uid;
+	};
 }

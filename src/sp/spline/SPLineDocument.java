@@ -42,4 +42,10 @@ public class SPLineDocument extends SPLine
 	{
 		return this.uid;
 	}
+	
+	@Override
+	public void setUid(String uid)
+	{
+		this.uid = uid;
+	};
 }

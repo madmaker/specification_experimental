@@ -1,4 +1,4 @@
-package sp;
+package reports;
 
 public class Error
 {

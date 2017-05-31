@@ -2,7 +2,7 @@ package sp.spline;
 
 import sp.spline.attributes.SLKits;
 
-public class MaterialSpecLineAttributes extends SPLineAttributes
+public class MaterialSpecLineAttributes extends SPLineAttributesPlain
 {
 	private SLKits kits;
 
@@ -11,11 +11,11 @@ public class MaterialSpecLineAttributes extends SPLineAttributes
 
 	}
 
-	public void addKit(String id, String name, double qty)
+	public void addKit(String id, String name, int qty)
 	{
 		if (kits == null)
 			this.kits = new SLKits();
-		this.kits.addKit(id, name, (int)qty);
+		this.kits.addKit(id, name, qty);
 	}
 
 	public void addKit(SLKits kit)

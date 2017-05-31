@@ -1,16 +1,16 @@
-package sp;
+package vp;
 
 import java.io.File;
 
 import reports.ReportConfiguration;
-import sp.spblock.SPBlockList;
+import vp.vpblock.VPBlockList;
 
 public class Report
 {
 	public enum ReportType {PDF, XLS}
 	
 	public String name;
-	public SPBlockList blockList;
+	public VPBlockList blockList;
 	public File data;
 	public File report;
 	public ReportConfiguration configuration;

@@ -13,6 +13,7 @@ import com.teamcenter.rac.kernel.TCComponentItemRevision;
 import com.teamcenter.rac.kernel.TCException;
 import com.teamcenter.rac.pse.plugin.Activator;
 
+import reports.ErrorList;
 import sp.spblock.SPBlockList;
 import sp.xml.XmlBuilder;
 import sp.xml.XmlBuilderConfiguration;
@@ -80,6 +81,7 @@ public class SP
 		report.configuration = A4pdfBuilderconfiguration;
 
 		OceanosReportBuilder reportBuilder = new OceanosReportBuilder(report);
+		reportBuilder.buildReport();
 	}
 	
 	public void uploadReportFile()
