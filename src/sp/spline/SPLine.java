@@ -7,7 +7,7 @@ import reports.EnumBlockType;
 public abstract class SPLine<T extends SPLineAttributesPlain>
 {
 	public T attributes;
-	public EnumBlockType blockContentType;
+	public EnumBlockType blockContentType = EnumBlockType.NONE;
 	public int blockType;
 	public boolean isSubstitute = false;
 	public boolean isRenumerizable = false;

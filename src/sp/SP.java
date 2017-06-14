@@ -13,7 +13,9 @@ import com.teamcenter.rac.kernel.TCComponentItemRevision;
 import com.teamcenter.rac.kernel.TCException;
 import com.teamcenter.rac.pse.plugin.Activator;
 
+import reports.EnumBlockType;
 import reports.ErrorList;
+import sp.spblock.SPBlock;
 import sp.spblock.SPBlockList;
 import sp.xml.XmlBuilder;
 import sp.xml.XmlBuilderConfiguration;
@@ -40,6 +42,7 @@ public class SP
 		stampData = new StampData();
 		report = new Report("My SP Report");
 		report.blockList = new SPBlockList();
+		initBlocks(report.blockList);
 		errorList = new ErrorList();
 	}
 	
@@ -53,6 +56,17 @@ public class SP
 			ex.printStackTrace();
 			throw new RuntimeException("Error while initializing");
 		}
+	}
+	
+	void initBlocks(SPBlockList blockList){
+		blockList.add(new SPBlock(EnumBlockType.ASSEMBLIES));
+		blockList.add(new SPBlock(EnumBlockType.COMPLEXES));
+		blockList.add(new SPBlock(EnumBlockType.DETAILS));
+		blockList.add(new SPBlock(EnumBlockType.DOCUMENTS));
+		blockList.add(new SPBlock(EnumBlockType.KITS));
+		blockList.add(new SPBlock(EnumBlockType.MATERIALS));
+		blockList.add(new SPBlock(EnumBlockType.OTHERS));
+		blockList.add(new SPBlock(EnumBlockType.STANDARDS));
 	}
 
 	public void readData()

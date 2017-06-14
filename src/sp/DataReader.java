@@ -223,6 +223,9 @@ public class DataReader
 	{
 		try
 		{
+			OceanosBlockLineFactory factory = new OceanosBlockLineFactory(specification);
+			SPLine blockLine;
+			
 			ExpandPSOneLevelInfo levelInfo = new ExpandPSOneLevelInfo();
 			ExpandPSOneLevelPref levelPref = new ExpandPSOneLevelPref();
 
@@ -240,17 +243,9 @@ public class DataReader
 					for (ExpandPSData psData : levelOut.children)
 					{
 						monitor.worked(1);
-						/*** Для отладки ***/
 						System.out.println(psData.bomLine.getProperty("bl_line_name"));
-						try
-						{
-							Thread.sleep(100);
-						}
-						catch (InterruptedException e)
-						{
-							e.printStackTrace();
-						}
-						/*** Для отладки ***/
+						blockLine = factory.newBlockLine(psData.bomLine);
+						specification.report.blockList.getBlock(blockLine.blockContentType).addLine(blockLine);
 						checkIfMonitorIsCancelled(monitor);
 					}
 				}

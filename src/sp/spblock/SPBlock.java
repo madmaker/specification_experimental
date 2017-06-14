@@ -3,17 +3,23 @@ package sp.spblock;
 import java.util.ArrayList;
 
 import reports.Block;
+import reports.EnumBlockType;
 import sp.spline.SPLine;
 
 public class SPBlock extends Block
 {
-	public String				title;
 	public SPBlockAttributes	attributes;
 	private ArrayList<SPLine>	lines;
-
-	public SPBlock(String title, SPBlockAttributes attributes)
+	
+	public SPBlock(EnumBlockType type)
 	{
-		this.title = title;
+		this.attributes = new SPBlockAttributes();
+		this.attributes.contentType = type;
+		this.lines = new ArrayList<SPLine>();
+	}
+
+	public SPBlock(SPBlockAttributes attributes)
+	{
 		this.attributes = attributes;
 		this.lines = new ArrayList<SPLine>();
 	}
@@ -32,6 +38,11 @@ public class SPBlock extends Block
 	{
 		return lines.size();
 	};
+	
+	public String getTitle()
+	{
+		return attributes.contentType.title();
+	}
 
 	public void addLine(SPLine line){};
 

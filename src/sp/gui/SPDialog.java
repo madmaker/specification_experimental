@@ -107,13 +107,9 @@ public class SPDialog extends Dialog
 		TableItem blockItem;
 		while(iterator.hasNext()){
 			block = iterator.next();
-			System.out.println("In fill contents: " + block.title + "=" + block.getLines().size());
+			System.out.println("In fill contents: " + block.getTitle() + "=" + block.size());
 			blockItem = new TableItem(table, SWT.NONE);
-			if(!block.title.equals("Документация")){
-				blockItem.setText(new String[]{block.title, String.valueOf(block.attributes.reservePosCount), String.valueOf(block.attributes.reserveLinesCount), String.valueOf(block.attributes.reservePosCount)});
-			} else {
-				blockItem.setText(new String[]{block.title, String.valueOf(block.attributes.reservePosCount), String.valueOf(block.attributes.reserveLinesCount), String.valueOf(block.attributes.reservePosCount)});
-			}
+			blockItem.setText(new String[]{block.getTitle(), String.valueOf(block.attributes.reservePosCount), String.valueOf(block.attributes.reserveLinesCount), String.valueOf(block.attributes.reservePosCount)});
 		}
 		text_AddedText.setText(SPSettings.additionalText==null?"":SPSettings.additionalText);
 		
@@ -135,11 +131,11 @@ public class SPDialog extends Dialog
 		String s_NCheckDate = specification.stampData.normCheckDate;
 		String s_ApproveDate = specification.stampData.approveDate;
 		System.out.println("::DATE::"+s_DesignDate);
-		if(s_DesignDate!=null) { dateDesigner.setDate(DateUtil.getDateFormSimpleString(s_DesignDate)); }else{ dateDesigner.setDate(""); }
-		if(s_CheckDate!=null) { dateCheck.setDate(DateUtil.getDateFormSimpleString(s_CheckDate)); }else{ dateCheck.setDate(""); }
-		if(s_TCheckDate!=null) { dateTCheck.setDate(DateUtil.getDateFormSimpleString(s_TCheckDate)); }else{ dateTCheck.setDate(""); }
-		if(s_NCheckDate!=null) { dateNCheck.setDate(DateUtil.getDateFormSimpleString(s_NCheckDate)); }else{ dateNCheck.setDate(""); }
-		if(s_ApproveDate!=null) { dateApprover.setDate(DateUtil.getDateFormSimpleString(s_ApproveDate)); }else{ dateApprover.setDate(""); }
+		if(!s_DesignDate.isEmpty()) { dateDesigner.setDate(DateUtil.getDateFormSimpleString(s_DesignDate)); }else{ dateDesigner.setDate(""); }
+		if(!s_CheckDate.isEmpty()) { dateCheck.setDate(DateUtil.getDateFormSimpleString(s_CheckDate)); }else{ dateCheck.setDate(""); }
+		if(!s_TCheckDate.isEmpty()) { dateTCheck.setDate(DateUtil.getDateFormSimpleString(s_TCheckDate)); }else{ dateTCheck.setDate(""); }
+		if(!s_NCheckDate.isEmpty()) { dateNCheck.setDate(DateUtil.getDateFormSimpleString(s_NCheckDate)); }else{ dateNCheck.setDate(""); }
+		if(!s_ApproveDate.isEmpty()) { dateApprover.setDate(DateUtil.getDateFormSimpleString(s_ApproveDate)); }else{ dateApprover.setDate(""); }
 	}
 	
 	/**
@@ -186,11 +182,11 @@ public class SPDialog extends Dialog
 		
 		Label labelTCheck = new Label(compositeSignatures, SWT.NONE);
 		labelTCheck.setBounds(37, 128, 90, 23);
-		labelTCheck.setText("Т.контр");
+		labelTCheck.setText("Checker");
 		
 		Label labelApprover = new Label(compositeSignatures, SWT.NONE);
 		labelApprover.setBounds(37, 215, 90, 23);
-		labelApprover.setText("\u0423\u0442\u0432\u0435\u0440\u0434\u0438\u043B");
+		labelApprover.setText("Approver");
 		
 		textNCheck = new Text(compositeSignatures, SWT.BORDER);
 		textNCheck.setBounds(144, 170, 110, 23);
@@ -253,9 +249,9 @@ public class SPDialog extends Dialog
 		button_Renumerize.setText("\u041F\u0435\u0440\u0435\u043D\u0443\u043C\u0435\u0440\u043E\u0432\u0430\u0442\u044C \u043F\u043E\u0437\u0438\u0446\u0438\u0438");
 		button_Renumerize.setEnabled(SPSettings.canRenumerize);
 		if(!button_Renumerize.isEnabled()) {
-			button_Renumerize.setToolTipText("Недоступно, указан запрет смены позиций.");
+			button_Renumerize.setToolTipText("Renumerize not available.");
 		} else {
-			button_Renumerize.setToolTipText("Перенумерация позиций с возможностью резерва строк и позиций.");
+			button_Renumerize.setToolTipText("Renumerize");
 		}
 		
 		Group group = new Group(compositeMain, SWT.NONE);
@@ -327,7 +323,7 @@ public class SPDialog extends Dialog
 						continue;
 					};
 					for (int i = 1; i < table.getColumnCount(); i++) {
-						if((item.getText(0).equals("Документация") || item.getText(0).equals("Комплекты")) && i!=2){ continue; };
+						if((item.getText(0).equals("������������") || item.getText(0).equals("���������")) && i!=2){ continue; };
 						Rectangle rect = item.getBounds(i);
 						if (rect.contains(pt)) {
 							final int column = i;
@@ -415,7 +411,7 @@ public class SPDialog extends Dialog
 		
 		final Button button_ShowAdditionalForm = new Button(compositeMain, SWT.CHECK);
 		button_ShowAdditionalForm.setBounds(10, 320, 225, 16);
-		button_ShowAdditionalForm.setText("Показать дополнительную форму");
+		button_ShowAdditionalForm.setText("Show additional form");
 		
 		Label label = new Label(compositeMain, SWT.NONE);
 		label.setBounds(10, 317, 136, 13);
@@ -474,17 +470,17 @@ public class SPDialog extends Dialog
 				specification.stampData.normCheck = textNCheck.getText();
 				specification.stampData.approve = textApprover.getText();
 				
-				specification.stampData.designDate = dateDesigner.getText().equals("Дата не установлена.")?null:fixData(dateDesigner.getText());
-				specification.stampData.checkDate = dateCheck.getText().equals("Дата не установлена.")?null:fixData(dateCheck.getText());
-				specification.stampData.techCheckDate = dateTCheck.getText().equals("Дата не установлена.")?null:fixData(dateTCheck.getText());
-				specification.stampData.normCheckDate = dateNCheck.getText().equals("Дата не установлена.")?null:fixData(dateNCheck.getText());
-				specification.stampData.approveDate = dateApprover.getText().equals("Дата не установлена.")?null:fixData(dateApprover.getText());
+				specification.stampData.designDate = dateDesigner.getText().equals("���� �� �����������.")?null:fixData(dateDesigner.getText());
+				specification.stampData.checkDate = dateCheck.getText().equals("���� �� �����������.")?null:fixData(dateCheck.getText());
+				specification.stampData.techCheckDate = dateTCheck.getText().equals("���� �� �����������.")?null:fixData(dateTCheck.getText());
+				specification.stampData.normCheckDate = dateNCheck.getText().equals("���� �� �����������.")?null:fixData(dateNCheck.getText());
+				specification.stampData.approveDate = dateApprover.getText().equals("���� �� �����������.")?null:fixData(dateApprover.getText());
 				
 				SPBlockList blockList = (SPBlockList)specification.report.blockList;
 				int j = 0;
 				for(int i = 0; i < table.getItemCount(); i++){
 					TableItem tableItem = table.getItem(i);
-					if(tableItem.getText(0).startsWith("Устанавливается")) continue;
+					if(tableItem.getText(0).startsWith("���������������")) continue;
 					SPBlock block = (SPBlock) blockList.get(j);
 					block.attributes.reservePosCount = Integer.parseInt(tableItem.getText(1).isEmpty()?"0":tableItem.getText(1));
 					block.attributes.reserveLinesCount = Integer.parseInt(tableItem.getText(2).isEmpty()?"0":tableItem.getText(2));

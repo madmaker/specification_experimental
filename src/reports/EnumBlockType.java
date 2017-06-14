@@ -4,47 +4,47 @@ public enum EnumBlockType
 {
 	NONE {
 		public String title(){
-			return "������������� ��� �������";
+			return "-";
 		}
 	},
 	DOCUMENTS {
 		public String title(){
-			return "������������";
+			return "Документы";
 		}
 	},
 	COMPLEXES {
 		public String title(){
-			return "���������";
+			return "Комплексы";
 		}
 	},
 	ASSEMBLIES {
 		public String title(){
-			return "��������� �������";
+			return "Сборочные изделия";
 		}
 	},
 	DETAILS {
 		public String title(){
-			return "������";
+			return "Детали";
 		}
 	},
 	STANDARDS {
 		public String title(){
-			return "����������� �������";
+			return "Стандартные изделия";
 		}
 	},
 	OTHERS {
 		public String title(){
-			return "������ �������";
+			return "Прочие изделия";
 		}
 	},
 	MATERIALS {
 		public String title(){
-			return "���������";
+			return "Материалы";
 		}
 	},
 	KITS {
 		public String title(){
-			return "���������";
+			return "Комплекты";
 		}
 	};
 	

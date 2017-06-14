@@ -34,7 +34,7 @@ public class SPSettings
 		doShowAdditionalForm = false;
 		additionalText = "";
 		blockSettings = "";
-		if(nonbreakableWords.length > 0)
+		if(nonbreakableWords!=null && nonbreakableWords.length > 0)
 			nonbreakableWords = new String[]{};
 	}
 }

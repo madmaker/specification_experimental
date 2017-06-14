@@ -6,14 +6,17 @@ import java.util.ListIterator;
 
 import reports.BlockList;
 import reports.EnumBlockType;
+import sp.spline.SPLine;
 
 public class SPBlockList implements BlockList<SPBlock>
 {
 	protected List<SPBlock> list;
+	private SPBlock errorBlock;
 	
 	public SPBlockList()
 	{
 		list = new LinkedList<SPBlock>();
+		errorBlock = new SPBlock(EnumBlockType.NONE);
 	}
 
 	public SPBlock getBlock(EnumBlockType contentType)
@@ -23,7 +26,7 @@ public class SPBlockList implements BlockList<SPBlock>
 			if (block.attributes.contentType == contentType)
 				return block;
 		}
-		return null;
+		return errorBlock;
 	}
 	
 	public SPBlock getBlock(EnumBlockType contentType, int type)
@@ -33,7 +36,7 @@ public class SPBlockList implements BlockList<SPBlock>
 			if (block.attributes.contentType == contentType && block.attributes.type == type)
 				return block;
 		}
-		return null;
+		return errorBlock;
 	}
 	
 	public void remove(int i)
@@ -60,15 +63,19 @@ public class SPBlockList implements BlockList<SPBlock>
 	@Override
 	public SPBlock get(int i)
 	{
-		// TODO Auto-generated method stub
-		return null;
+		if(list.size()>i && i>=0)
+			return list.get(i);
+		else
+			return errorBlock;
 	}
 
 	@Override
 	public SPBlock getLast()
 	{
-		// TODO Auto-generated method stub
-		return null;
+		if(list.size()>0)
+			return list.get(list.size()-1);
+		else
+			return errorBlock;
 	}
 
 	@Override
